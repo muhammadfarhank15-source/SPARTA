@@ -1043,6 +1043,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     try {
       const payload = {
         action: 'SYNC_ALL',
+        apiKey: 'SPARTA',
         wargaBinaan: wbpList.map((w) => [
           w.id,
           w.nomorRegistrasi,

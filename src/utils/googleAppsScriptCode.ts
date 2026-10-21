@@ -26,6 +26,7 @@ export const GOOGLE_APPS_SCRIPT_CODE = `/**
  *    lalu tempelkan di menu "Integrasi Google Sheets" pada Dashboard Admin aplikasi.
  */
 
+const API_KEY = "SPARTA";
 const SHEET_TRANSAKSI = "TRANSAKSI";
 const SHEET_WARGA_BINAAN = "WARGA_BINAAN";
 const SHEET_PENGATURAN = "PENGATURAN";
@@ -37,6 +38,7 @@ const SHEET_ARSIP_BULANAN = "ARSIP_BULANAN";
 function doGet(e) {
   try {
     const action = e && e.parameter && e.parameter.action ? e.parameter.action : "GET_ALL";
+    const apiKey = e && e.parameter ? (e.parameter.apiKey || e.parameter.api_key || "") : "";
     const ss = SpreadsheetApp.getActiveSpreadsheet();
 
     if (action === "GET_PUBLIC_SUMMARY") {
@@ -79,7 +81,15 @@ function doGet(e) {
       });
     }
 
-    // Default GET_ALL (untuk Admin yang memegang script URL)
+    // Proteksi Keamanan: Akses data penuh memerlukan API Key yang valid
+    if (API_KEY && apiKey !== API_KEY) {
+      return jsonResponse({
+        success: false,
+        error: "Akses ditolak: Parameter apiKey tidak valid atau tidak disertakan."
+      });
+    }
+
+    // Default GET_ALL (untuk Admin yang memegang script URL & API Key)
     const transaksi = readSheet(ss, SHEET_TRANSAKSI);
     const wargaBinaan = readSheet(ss, SHEET_WARGA_BINAAN);
     const arsipBulanan = readSheet(ss, SHEET_ARSIP_BULANAN);
@@ -108,6 +118,16 @@ function doPost(e) {
   try {
     const payload = JSON.parse(e.postData.contents);
     const action = payload.action;
+    const apiKey = payload.apiKey || payload.api_key || (e && e.parameter && (e.parameter.apiKey || e.parameter.api_key));
+
+    // Validasi Keamanan API Key SPARTA
+    if (API_KEY && apiKey !== API_KEY) {
+      return jsonResponse({
+        success: false,
+        error: "Akses ditolak: API Key keamanan SPARTA tidak valid atau belum dicantumkan."
+      });
+    }
+
     const ss = SpreadsheetApp.getActiveSpreadsheet();
 
     // 1. Inisialisasi / Sync Semuanya

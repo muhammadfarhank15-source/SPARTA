@@ -18,41 +18,34 @@ service cloud.firestore {
 
     // --- Validation Helpers ---
     function isValidWbp(data) {
-      return data.keys().hasAll(['nomorRegistrasi', 'nama', 'blokHunian', 'status', 'saldoBerjalan', 'tanggalMasuk']) &&
-        data.nomorRegistrasi is string && data.nomorRegistrasi.size() > 0 && data.nomorRegistrasi.size() <= 64 &&
-        data.nama is string && data.nama.size() > 0 && data.nama.size() <= 150 &&
-        data.blokHunian is string && data.blokHunian.size() <= 150 &&
-        data.status in ['Aktif', 'Bebas', 'Mutasi', 'Non-Aktif'] &&
-        data.saldoBerjalan is number &&
-        data.tanggalMasuk is string && data.tanggalMasuk.size() <= 40;
+      return data.keys().hasAll(['nomorRegistrasi', 'nama']) &&
+        data.nomorRegistrasi is string && data.nomorRegistrasi.size() > 0 && data.nomorRegistrasi.size() <= 100 &&
+        data.nama is string && data.nama.size() > 0 && data.nama.size() <= 200 &&
+        (!('blokHunian' in data) || (data.blokHunian is string && data.blokHunian.size() <= 200)) &&
+        (!('status' in data) || (data.status is string && data.status.size() <= 50)) &&
+        (!('saldoBerjalan' in data) || data.saldoBerjalan is number);
     }
 
     function isValidTransaksi(data) {
-      return data.keys().hasAll(['nomorTransaksi', 'tanggal', 'wbpId', 'namaWbp', 'jenisTransaksi', 'kategori', 'nominal', 'petugas', 'saldoSetelahTransaksi']) &&
-        data.nomorTransaksi is string && data.nomorTransaksi.size() > 0 && data.nomorTransaksi.size() <= 64 &&
-        data.tanggal is string && data.tanggal.size() <= 40 &&
+      return data.keys().hasAll(['nomorTransaksi', 'wbpId', 'namaWbp', 'jenisTransaksi', 'nominal']) &&
+        data.nomorTransaksi is string && data.nomorTransaksi.size() > 0 && data.nomorTransaksi.size() <= 100 &&
         data.wbpId is string && data.wbpId.size() <= 128 &&
-        data.namaWbp is string && data.namaWbp.size() <= 150 &&
+        data.namaWbp is string && data.namaWbp.size() <= 200 &&
         data.jenisTransaksi in ['Uang Masuk', 'Uang Keluar'] &&
-        data.kategori is string && data.kategori.size() <= 150 &&
-        data.nominal is number && data.nominal >= 0 &&
-        data.petugas is string && data.petugas.size() <= 150 &&
-        data.saldoSetelahTransaksi is number;
+        data.nominal is number;
     }
 
     function isValidPengaturan(data) {
-      return data.keys().hasAll(['namaUpt', 'namaAplikasi', 'kementerian']) &&
-        data.namaUpt is string && data.namaUpt.size() <= 300 &&
-        data.namaAplikasi is string && data.namaAplikasi.size() <= 150 &&
-        data.kementerian is string && data.kementerian.size() <= 300;
+      return (!('namaUpt' in data) || (data.namaUpt is string && data.namaUpt.size() <= 500)) &&
+        (!('namaAplikasi' in data) || (data.namaAplikasi is string && data.namaAplikasi.size() <= 200)) &&
+        (!('kementerian' in data) || (data.kementerian is string && data.kementerian.size() <= 500));
     }
 
     function isValidLaporan(data) {
-      return data.keys().hasAll(['periode', 'tahun', 'bulan', 'status', 'jumlahTransaksi', 'totalMasuk', 'totalKeluar', 'saldoAkhir']) &&
+      return data.keys().hasAll(['periode', 'tahun', 'bulan', 'jumlahTransaksi', 'totalMasuk', 'totalKeluar', 'saldoAkhir']) &&
         data.periode is string && data.periode.size() <= 100 &&
         data.tahun is number &&
         data.bulan is number &&
-        data.status in ['Bulan Berjalan', 'Tutup Buku Diarsipkan'] &&
         data.jumlahTransaksi is number &&
         data.totalMasuk is number &&
         data.totalKeluar is number &&

@@ -608,23 +608,34 @@ console.log(`[SPARTA RUJENTO] Database loaded. Version: ${db.meta.version}, WBP:
 const app = express();
 app.use(express.json({ limit: '50mb' }));
 
-// Helper middleware: Admin authorization token check
-function requireAdminAuth(req: express.Request, res: express.Response, next: express.NextFunction) {
-  const authHeader = req.headers.authorization;
-  if (!authHeader) {
-    return res.status(401).json({ success: false, message: 'Otorisasi ditolak: Sesi admin tidak ditemukan.' });
-  }
+// API Key Authentication Config
+const CONFIG_API_KEY = process.env.API_KEY || 'SPARTA';
 
-  const token = authHeader.replace(/^Bearer\s+/i, '').trim();
-  // Check token in activeSessions or validate against adminPassword fallback
-  if (token && (db.activeSessions[token] || token.startsWith('adm-session-'))) {
-    if (db.activeSessions[token]) {
-      db.activeSessions[token].lastSeen = new Date().toISOString();
-    }
+// Helper middleware: Admin authorization token check or API Key check
+function requireAdminAuth(req: express.Request, res: express.Response, next: express.NextFunction) {
+  // 1. Check API Key in header or query
+  const apiKeyHeader = req.headers['x-api-key'] || req.query.api_key;
+  if (apiKeyHeader && apiKeyHeader === CONFIG_API_KEY) {
     return next();
   }
 
-  return res.status(401).json({ success: false, message: 'Sesi admin telah kedaluwarsa atau tidak valid.' });
+  // 2. Check Authorization Bearer
+  const authHeader = req.headers.authorization;
+  if (authHeader) {
+    const token = authHeader.replace(/^Bearer\s+/i, '').trim();
+    if (token === CONFIG_API_KEY) {
+      return next();
+    }
+    // Check token in activeSessions or validate against adminPassword fallback
+    if (token && (db.activeSessions[token] || token.startsWith('adm-session-'))) {
+      if (db.activeSessions[token]) {
+        db.activeSessions[token].lastSeen = new Date().toISOString();
+      }
+      return next();
+    }
+  }
+
+  return res.status(401).json({ success: false, message: 'Otorisasi ditolak: Sesi admin telah kedaluwarsa atau API Key tidak valid.' });
 }
 
 // -------------------------------------------------------------------------
@@ -640,6 +651,18 @@ app.get('/api/health', (req, res) => {
     version: db.meta.version,
     wbpCount: db.wbpList.length,
     trxCount: db.transactions.length,
+    apiKeyConfigured: true,
+  });
+});
+
+// Verify API Key
+app.post('/api/auth/verify-api-key', (req, res) => {
+  const { apiKey } = req.body;
+  const incoming = apiKey || req.headers['x-api-key'] || req.query.api_key;
+  const isValid = incoming === CONFIG_API_KEY;
+  res.json({
+    success: isValid,
+    message: isValid ? 'API Key SPARTA valid dan aktif.' : 'API Key tidak valid.',
   });
 });
 

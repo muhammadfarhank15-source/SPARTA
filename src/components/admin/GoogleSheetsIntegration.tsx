@@ -133,6 +133,19 @@ export const GoogleSheetsIntegration: React.FC = () => {
             Simpan Endpoint
           </button>
         </form>
+
+        <div className="p-3.5 bg-slate-50 border border-slate-200 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+          <div className="flex items-center gap-2">
+            <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
+            <div>
+              <span className="font-semibold text-slate-800">API Key Keamanan:</span>{' '}
+              <code className="px-2 py-0.5 bg-slate-200 rounded font-mono font-bold text-slate-900">SPARTA</code>
+            </div>
+          </div>
+          <span className="text-[11px] text-slate-500">
+            Setiap sinkronisasi dan request otomatis diverifikasi menggunakan API Key ini untuk mencegah akses tidak sah.
+          </span>
+        </div>
       </div>
 
       {/* Google Sheets Structure Specifications */}

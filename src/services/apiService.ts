@@ -60,6 +60,7 @@ class ApiService {
   private getHeaders(): HeadersInit {
     const headers: Record<string, string> = {
       'Content-Type': 'application/json',
+      'x-api-key': import.meta.env.VITE_API_KEY || 'SPARTA',
     };
     if (this.token) {
       headers['Authorization'] = `Bearer ${this.token}`;
