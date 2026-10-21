@@ -45,6 +45,40 @@ export interface FirestoreSubscriptionHandlers {
   onError?: (err: Error) => void;
 }
 
+/**
+ * Recursively cleans any object or data structure for Firestore:
+ * - Drops any keys whose values are `undefined`
+ * - Replaces `undefined` inside arrays with safe primitives
+ * - Ensures safe objects for `setDoc`, `updateDoc`, and `writeBatch`
+ */
+export function sanitizeForFirestore<T>(val: T): T {
+  if (val === undefined || val === null) {
+    return (val === undefined ? null : val) as unknown as T;
+  }
+  if (typeof val !== 'object') {
+    return val;
+  }
+  if (val instanceof Date) {
+    return val;
+  }
+  if (Array.isArray(val)) {
+    return val.map((item) => (item === undefined ? null : sanitizeForFirestore(item))) as unknown as T;
+  }
+  const clean: Record<string, any> = {};
+  for (const [key, value] of Object.entries(val as Record<string, any>)) {
+    if (value !== undefined) {
+      if (value !== null && typeof value === 'object' && !(value instanceof Date) && !Array.isArray(value)) {
+        clean[key] = sanitizeForFirestore(value);
+      } else if (Array.isArray(value)) {
+        clean[key] = value.map((item) => (item === undefined ? null : sanitizeForFirestore(item)));
+      } else {
+        clean[key] = value;
+      }
+    }
+  }
+  return clean as T;
+}
+
 class FirestoreService {
   /**
    * 1. Real-time multi-device sync listener using onSnapshot()
@@ -227,26 +261,26 @@ class FirestoreService {
       const batch = writeBatch(db);
 
       // Seed UPT Settings
-      batch.set(doc(db, COL_SETTINGS, DOC_SETTINGS_MAIN), initialSettings);
+      batch.set(doc(db, COL_SETTINGS, DOC_SETTINGS_MAIN), sanitizeForFirestore(initialSettings));
 
       // Seed Categories
       for (const cat of initialCategories) {
-        batch.set(doc(db, COL_CATEGORIES, cat.id), cat);
+        batch.set(doc(db, COL_CATEGORIES, cat.id), sanitizeForFirestore(cat));
       }
 
       // Seed initial WBP
       for (const wbp of initialWbp) {
-        batch.set(doc(db, COL_WBP, wbp.id), wbp);
+        batch.set(doc(db, COL_WBP, wbp.id), sanitizeForFirestore(wbp));
       }
 
       // Seed initial Transactions
       for (const trx of initialTrx) {
-        batch.set(doc(db, COL_TRX, trx.id), trx);
+        batch.set(doc(db, COL_TRX, trx.id), sanitizeForFirestore(trx));
       }
 
       // Seed initial Reports
       for (const rep of initialReports) {
-        batch.set(doc(db, COL_REPORTS, rep.id), rep);
+        batch.set(doc(db, COL_REPORTS, rep.id), sanitizeForFirestore(rep));
       }
 
       // Commit batch
@@ -278,20 +312,30 @@ class FirestoreService {
     const initialSaldo = Number(data.saldoAwal) || 0;
 
     const newRecord: WargaBinaan = {
-      ...data,
       id: wbpId,
       nomorRegistrasi: data.nomorRegistrasi.trim(),
       nama: data.nama.trim(),
+      nik: data.nik?.trim() || '',
+      tempatLahir: data.tempatLahir?.trim() || '',
+      tanggalLahir: data.tanggalLahir || '',
+      jenisKelamin: data.jenisKelamin || '',
+      alamat: data.alamat?.trim() || '',
       blokHunian: data.blokHunian?.trim() || 'Blok Mapenaling 01',
       status: data.status || 'Aktif',
+      tanggalBebas: data.tanggalBebas || '',
+      uptTujuan: data.uptTujuan || '',
+      noSkMutasi: data.noSkMutasi || '',
+      jenisPerkara: data.jenisPerkara || '',
       saldoAwal: initialSaldo,
       saldoBerjalan: initialSaldo,
       tanggalMasuk: data.tanggalMasuk || new Date().toISOString().substring(0, 10),
+      catatan: data.catatan?.trim() || '',
+      fotoUrl: data.fotoUrl || '',
       updatedAt: new Date().toISOString(),
     };
 
     try {
-      await setDoc(doc(db, COL_WBP, wbpId), newRecord);
+      await setDoc(doc(db, COL_WBP, wbpId), sanitizeForFirestore(newRecord));
       await this.recordAuditLog(
         'Tambah WBP',
         'Data Warga Binaan',
@@ -313,7 +357,7 @@ class FirestoreService {
       };
       delete payload.id; // ID is immutable
 
-      await updateDoc(doc(db, COL_WBP, id), payload);
+      await updateDoc(doc(db, COL_WBP, id), sanitizeForFirestore(payload));
       await this.recordAuditLog(
         'Ubah Data WBP',
         'Data Warga Binaan',
@@ -397,7 +441,7 @@ class FirestoreService {
         }
       }
 
-      const batch = writeBatch(db);
+      let batch = writeBatch(db);
       let batchCount = 0;
 
       for (let idx = 0; idx < items.length; idx++) {
@@ -433,12 +477,12 @@ class FirestoreService {
           } else if (duplicateMode === 'UPDATE') {
             const updatedDoc: Record<string, any> = {
               nama,
-              nik: item.nik?.trim() || existingRecord.nik || '',
-              tempatLahir: item.tempatLahir?.trim() || existingRecord.tempatLahir || '',
+              nik: (item.nik || existingRecord.nik || '').trim(),
+              tempatLahir: (item.tempatLahir || existingRecord.tempatLahir || '').trim(),
               tanggalLahir: item.tanggalLahir || existingRecord.tanggalLahir || '',
               jenisKelamin: item.jenisKelamin || existingRecord.jenisKelamin || '',
-              alamat: item.alamat?.trim() || existingRecord.alamat || '',
-              blokHunian: item.blokHunian?.trim() || existingRecord.blokHunian || '',
+              alamat: (item.alamat || existingRecord.alamat || '').trim(),
+              blokHunian: (item.blokHunian || existingRecord.blokHunian || 'Blok Mapenaling 01').trim(),
               status: item.status || existingRecord.status || 'Aktif',
               tanggalBebas: item.tanggalBebas || existingRecord.tanggalBebas || '',
               uptTujuan: item.uptTujuan || existingRecord.uptTujuan || '',
@@ -449,7 +493,7 @@ class FirestoreService {
                 : existingRecord.catatan || '',
               updatedAt: new Date().toISOString(),
             };
-            batch.update(doc(db, COL_WBP, existingRecord.id), updatedDoc);
+            batch.update(doc(db, COL_WBP, existingRecord.id), sanitizeForFirestore(updatedDoc));
             batchCount++;
             updatedCount++;
             details.push({
@@ -464,18 +508,28 @@ class FirestoreService {
           const newId = `wbp-${Date.now()}-${idx}-${Math.random().toString(36).substring(2, 6)}`;
           const initialSaldo = typeof item.saldoAwal === 'number' && !isNaN(item.saldoAwal) ? item.saldoAwal : 0;
           const newDoc: WargaBinaan = {
-            ...item,
             id: newId,
             nomorRegistrasi: reg,
             nama,
-            blokHunian: item.blokHunian?.trim() || 'Blok Mapenaling 01',
+            nik: (item.nik || '').trim(),
+            tempatLahir: (item.tempatLahir || '').trim(),
+            tanggalLahir: item.tanggalLahir || '',
+            jenisKelamin: item.jenisKelamin || '',
+            alamat: (item.alamat || '').trim(),
+            blokHunian: (item.blokHunian || 'Blok Mapenaling 01').trim(),
             status: item.status || 'Aktif',
+            tanggalBebas: item.tanggalBebas || '',
+            uptTujuan: item.uptTujuan || '',
+            noSkMutasi: item.noSkMutasi || '',
+            jenisPerkara: item.jenisPerkara || '',
             saldoAwal: initialSaldo,
             saldoBerjalan: initialSaldo,
             tanggalMasuk: item.tanggalMasuk || new Date().toISOString().substring(0, 10),
+            catatan: (item.catatan || '').trim(),
+            fotoUrl: item.fotoUrl || '',
             updatedAt: new Date().toISOString(),
           };
-          batch.set(doc(db, COL_WBP, newId), newDoc);
+          batch.set(doc(db, COL_WBP, newId), sanitizeForFirestore(newDoc));
           batchCount++;
           insertedCount++;
           details.push({
@@ -485,6 +539,13 @@ class FirestoreService {
             statusAksi: 'INSERTED',
             keterangan: 'Berhasil: Warga binaan baru tersimpan ke Firestore.',
           });
+        }
+
+        // Commit chunk every 400 writes to respect Firestore's 500-operation limit
+        if (batchCount >= 400) {
+          await batch.commit();
+          batch = writeBatch(db);
+          batchCount = 0;
         }
       }
 
@@ -512,8 +573,22 @@ class FirestoreService {
         timestamp,
         details,
       };
-    } catch (error) {
-      handleFirestoreError(error, OperationType.WRITE, COL_WBP);
+    } catch (error: any) {
+      console.error('[Firestore] Bulk import failed:', error);
+      const errMsg = error?.message || 'Terjadi kesalahan saat memproses data import ke Firestore.';
+      return {
+        success: false,
+        message: `Gagal import Excel: ${errMsg}`,
+        fileName,
+        totalRows: items.length,
+        insertedCount,
+        updatedCount,
+        skippedCount,
+        failedCount: items.length - (insertedCount + updatedCount + skippedCount),
+        duplicateMode,
+        timestamp,
+        details,
+      };
     }
   }
 
@@ -558,11 +633,11 @@ class FirestoreService {
     try {
       // Atomic Batch Write: Update transaction and update WBP balance together
       const batch = writeBatch(db);
-      batch.set(doc(db, COL_TRX, trxId), newTrx);
-      batch.update(doc(db, COL_WBP, targetWbp.id), {
+      batch.set(doc(db, COL_TRX, trxId), sanitizeForFirestore(newTrx));
+      batch.update(doc(db, COL_WBP, targetWbp.id), sanitizeForFirestore({
         saldoBerjalan: newSaldo,
         updatedAt: updatedWbp.updatedAt,
-      });
+      }));
 
       await batch.commit();
 
@@ -588,7 +663,7 @@ class FirestoreService {
       };
       delete (payload as any).id;
 
-      await updateDoc(doc(db, COL_TRX, id), payload);
+      await updateDoc(doc(db, COL_TRX, id), sanitizeForFirestore(payload));
       await this.recordAuditLog(
         'Koreksi Transaksi',
         'Riwayat Transaksi',
@@ -738,7 +813,7 @@ class FirestoreService {
       const batch = writeBatch(db);
 
       // Save monthly report
-      batch.set(doc(db, COL_REPORTS, payload.report.id), payload.report);
+      batch.set(doc(db, COL_REPORTS, payload.report.id), sanitizeForFirestore(payload.report));
 
       // Apply resets if checked
       if (payload.options.resetSaldo) {
@@ -841,7 +916,7 @@ class FirestoreService {
     };
 
     try {
-      await setDoc(doc(db, COL_AUDIT, logId), logEntry);
+      await setDoc(doc(db, COL_AUDIT, logId), sanitizeForFirestore(logEntry));
     } catch (err) {
       // Non-blocking log catch
       console.info('[Firestore] Audit log record notice:', err);

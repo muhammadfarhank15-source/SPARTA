@@ -70,11 +70,9 @@ export const PengaturanUpt: React.FC = () => {
   }, [uptSettings]);
 
   const handleFieldChange = (field: string, value: any) => {
-    setFormData((prev) => {
-      const next = { ...prev, [field]: value };
-      setFormDraft('upt_settings', next);
-      return next;
-    });
+    const next = { ...formData, [field]: value };
+    setFormData(next);
+    setFormDraft('upt_settings', next);
   };
 
   const [identityMsg, setIdentityMsg] = useState<{ type: 'success' | 'error'; text: string } | null>(null);

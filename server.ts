@@ -1,3 +1,5 @@
+process.env.DISABLE_HMR = 'true';
+
 import express from 'express';
 import { createServer as createViteServer } from 'vite';
 import path from 'path';
@@ -1116,8 +1118,18 @@ app.post('/api/wbp/bulk', requireAdminAuth, (req, res) => {
         id: `wbp-${Date.now()}-${idx}-${Math.random().toString(36).substring(2, 6)}`,
         nomorRegistrasi: reg,
         nama: nama,
+        nik: item.nik?.trim() || '',
+        tempatLahir: item.tempatLahir?.trim() || '',
+        tanggalLahir: item.tanggalLahir || '',
+        jenisKelamin: item.jenisKelamin || '',
+        alamat: item.alamat?.trim() || '',
         blokHunian: item.blokHunian?.trim() || 'Blok Mapenaling 01',
         status: item.status || 'Aktif',
+        tanggalBebas: item.tanggalBebas || '',
+        uptTujuan: item.uptTujuan || '',
+        noSkMutasi: item.noSkMutasi || '',
+        jenisPerkara: item.jenisPerkara || '',
+        catatan: item.catatan?.trim() || '',
         saldoAwal: initialSaldo,
         saldoBerjalan: initialSaldo,
         tanggalMasuk: item.tanggalMasuk || new Date().toISOString().substring(0, 10),
@@ -1486,7 +1498,10 @@ async function startServer() {
 
   if (!isProduction) {
     const vite = await createViteServer({
-      server: { middlewareMode: true },
+      server: {
+        middlewareMode: true,
+        hmr: false,
+      },
       appType: 'spa',
     });
     app.use(vite.middlewares);

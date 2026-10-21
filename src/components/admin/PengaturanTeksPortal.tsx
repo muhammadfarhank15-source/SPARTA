@@ -52,15 +52,13 @@ export const PengaturanTeksPortal: React.FC = () => {
   const [showResetConfirm, setShowResetConfirm] = useState(false);
 
   const handleChange = (field: keyof PublicPortalContent, value: string) => {
-    setFormData((prev) => {
-      const next = {
-        ...prev,
-        [field]: value,
-      };
-      // Register with 60s autosave manager
-      setFormDraft('portal_content', next);
-      return next;
-    });
+    const next = {
+      ...formData,
+      [field]: value,
+    };
+    setFormData(next);
+    // Register with 60s autosave manager
+    setFormDraft('portal_content', next);
   };
 
   const handleSave = async (e?: React.FormEvent) => {

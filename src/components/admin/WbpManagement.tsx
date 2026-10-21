@@ -65,14 +65,12 @@ export const WbpManagement: React.FC = () => {
 
   // Track draft changes for autosave
   const handleFieldChange = (field: string, value: any) => {
-    setFormData((prev) => {
-      const next = { ...prev, [field]: value };
-      // Register with 60-second autosave manager
-      setFormDraft(editingWbp ? 'wbp_edit' : 'wbp_new', {
-        ...(editingWbp ? { id: editingWbp.id } : {}),
-        ...next,
-      });
-      return next;
+    const next = { ...formData, [field]: value };
+    setFormData(next);
+    // Register with 60-second autosave manager
+    setFormDraft(editingWbp ? 'wbp_edit' : 'wbp_new', {
+      ...(editingWbp ? { id: editingWbp.id } : {}),
+      ...next,
     });
   };
 
@@ -181,12 +179,12 @@ export const WbpManagement: React.FC = () => {
           alamat: formData.alamat.trim(),
           blokHunian: formData.blokHunian.trim(),
           status: formData.status,
-          tanggalBebas: formData.status === 'Bebas' ? formData.tanggalBebas : undefined,
-          uptTujuan: formData.status === 'Mutasi' ? formData.uptTujuan : undefined,
-          noSkMutasi: formData.status === 'Mutasi' ? formData.noSkMutasi : undefined,
+          tanggalBebas: formData.status === 'Bebas' ? formData.tanggalBebas : '',
+          uptTujuan: formData.status === 'Mutasi' ? formData.uptTujuan : '',
+          noSkMutasi: formData.status === 'Mutasi' ? formData.noSkMutasi : '',
           jenisPerkara: formData.jenisPerkara.trim(),
           catatan: formData.catatan.trim(),
-          fotoUrl: formData.fotoUrl,
+          fotoUrl: formData.fotoUrl || '',
         });
         if (success) {
           clearFormDraft('wbp_edit');
@@ -206,12 +204,12 @@ export const WbpManagement: React.FC = () => {
           status: formData.status,
           saldoAwal: Number(formData.saldoAwal) || 0,
           tanggalMasuk: formData.tanggalMasuk,
-          tanggalBebas: formData.status === 'Bebas' ? formData.tanggalBebas : undefined,
-          uptTujuan: formData.status === 'Mutasi' ? formData.uptTujuan : undefined,
-          noSkMutasi: formData.status === 'Mutasi' ? formData.noSkMutasi : undefined,
+          tanggalBebas: formData.status === 'Bebas' ? formData.tanggalBebas : '',
+          uptTujuan: formData.status === 'Mutasi' ? formData.uptTujuan : '',
+          noSkMutasi: formData.status === 'Mutasi' ? formData.noSkMutasi : '',
           jenisPerkara: formData.jenisPerkara.trim(),
           catatan: formData.catatan.trim(),
-          fotoUrl: formData.fotoUrl,
+          fotoUrl: formData.fotoUrl || '',
         });
         if (success) {
           clearFormDraft('wbp_new');

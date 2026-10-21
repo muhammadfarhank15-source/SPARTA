@@ -13,6 +13,105 @@
     <meta name="twitter:image" content="/assets/logo.png" />
     <link rel="icon" type="image/png" href="/assets/logo.png" />
     <link rel="apple-touch-icon" href="/assets/logo.png" />
+    <script>
+      // Gracefully handle Vite HMR websocket disconnection in cloud reverse proxy environments
+      (function() {
+        if (typeof window === 'undefined') return;
+
+        // 1. Intercept Vite HMR WebSocket connections to avoid failed handshake across reverse proxy
+        var NativeWebSocket = window.WebSocket;
+        if (NativeWebSocket) {
+          function isViteHmr(protocols) {
+            if (!protocols) return false;
+            if (protocols === 'vite-hmr') return true;
+            if (Array.isArray(protocols) && protocols.indexOf('vite-hmr') !== -1) return true;
+            return false;
+          }
+
+          function MockViteWebSocket(url, protocols) {
+            if (!isViteHmr(protocols)) {
+              return new NativeWebSocket(url, protocols);
+            }
+            var target = new EventTarget();
+            this.readyState = 0; // CONNECTING
+            this.url = url;
+            this.protocol = 'vite-hmr';
+            this.extensions = '';
+            this.bufferedAmount = 0;
+            this.binaryType = 'blob';
+
+            var self = this;
+            this.addEventListener = function(type, listener, options) {
+              target.addEventListener(type, listener, options);
+            };
+            this.removeEventListener = function(type, listener, options) {
+              target.removeEventListener(type, listener, options);
+            };
+            this.dispatchEvent = function(event) {
+              return target.dispatchEvent(event);
+            };
+            this.send = function() {};
+            this.close = function() {
+              self.readyState = 3;
+              try { target.dispatchEvent(new Event('close')); } catch (e) {}
+            };
+
+            setTimeout(function() {
+              self.readyState = 1; // OPEN
+              try { target.dispatchEvent(new Event('open')); } catch (e) {}
+            }, 0);
+          }
+
+          MockViteWebSocket.CONNECTING = 0;
+          MockViteWebSocket.OPEN = 1;
+          MockViteWebSocket.CLOSING = 2;
+          MockViteWebSocket.CLOSED = 3;
+          MockViteWebSocket.prototype = Object.create(NativeWebSocket.prototype);
+          MockViteWebSocket.prototype.constructor = MockViteWebSocket;
+
+          window.WebSocket = MockViteWebSocket;
+        }
+
+        // 2. Intercept console.error from Vite's fallback logger if any
+        var origConsoleError = console.error;
+        console.error = function() {
+          var firstArg = arguments && arguments[0];
+          if (typeof firstArg === 'string' && (
+            firstArg.indexOf('[vite] failed to connect to websocket') !== -1 ||
+            firstArg.indexOf('WebSocket closed without opened') !== -1
+          )) {
+            return;
+          }
+          return origConsoleError.apply(console, arguments);
+        };
+
+        // 3. Catch window unhandled errors and promise rejections for websocket
+        window.addEventListener('error', function(event) {
+          var msg = (event && (event.message || (event.error && event.error.message))) || '';
+          if (typeof msg === 'string' && (
+            msg.indexOf('WebSocket closed without opened') !== -1 ||
+            msg.indexOf('failed to connect to websocket') !== -1 ||
+            msg.indexOf('@vite/client') !== -1
+          )) {
+            if (event.preventDefault) event.preventDefault();
+            if (event.stopImmediatePropagation) event.stopImmediatePropagation();
+            return true;
+          }
+        }, true);
+
+        window.addEventListener('unhandledrejection', function(event) {
+          var reason = event && event.reason;
+          var msg = (reason && (reason.message || reason.toString())) || '';
+          if (typeof msg === 'string' && (
+            msg.indexOf('WebSocket closed without opened') !== -1 ||
+            msg.indexOf('failed to connect to websocket') !== -1
+          )) {
+            if (event.preventDefault) event.preventDefault();
+            if (event.stopImmediatePropagation) event.stopImmediatePropagation();
+          }
+        });
+      })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,700;1,800&display=swap" rel="stylesheet" />

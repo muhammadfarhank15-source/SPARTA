@@ -420,17 +420,14 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     setFormDrafts((prev) => {
       const next = { ...prev };
       delete next[formKey];
-      const stillHas = Object.keys(next).length > 0;
-      if (!stillHas) {
-        setAutosaveState((st) => ({
-          ...st,
-          hasUnsavedChanges: false,
-          status: st.status === 'unsaved' ? 'idle' : st.status,
-          statusText: st.status === 'unsaved' ? 'Tersimpan ke Cloud Firestore' : st.statusText,
-        }));
-      }
       return next;
     });
+    setAutosaveState((st) => ({
+      ...st,
+      hasUnsavedChanges: false,
+      status: st.status === 'unsaved' ? 'idle' : st.status,
+      statusText: st.status === 'unsaved' ? 'Tersimpan ke Cloud Firestore' : st.statusText,
+    }));
   }, []);
 
   // --- AUTOSAVE ENGINE (FLUSH TO CLOUD FIRESTORE) ---

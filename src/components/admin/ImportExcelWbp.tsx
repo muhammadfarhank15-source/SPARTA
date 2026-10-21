@@ -415,18 +415,18 @@ export const ImportExcelWbp: React.FC = () => {
           rowIndex: i + 1,
           nomorRegistrasi: rawReg,
           nama: rawNama,
-          nik: rawNik || undefined,
-          tempatLahir: rawTempatLahir || undefined,
-          tanggalLahir: rawTglLahir || undefined,
-          jenisKelamin: rawJk || undefined,
-          alamat: rawAlamat || undefined,
+          nik: rawNik || '',
+          tempatLahir: rawTempatLahir || '',
+          tanggalLahir: rawTglLahir || '',
+          jenisKelamin: rawJk || '',
+          alamat: rawAlamat || '',
           blokHunian: rawBlok,
           status: parsedStatus,
           tanggalMasuk: rawTglMasuk,
-          tanggalBebas: rawTglBebas || undefined,
-          jenisPerkara: rawPerkara || undefined,
+          tanggalBebas: rawTglBebas || '',
+          jenisPerkara: rawPerkara || '',
           saldoAwal: isNaN(rawSaldo) ? 0 : rawSaldo,
-          catatan: rawCatatan || undefined,
+          catatan: rawCatatan || '',
           isValid: errors.length === 0,
           isDuplicateDb,
           isDuplicateFile,
@@ -518,21 +518,22 @@ export const ImportExcelWbp: React.FC = () => {
       return;
     }
 
+    const fallbackToday = new Date().toISOString().substring(0, 10);
     const itemsToImport = validCandidates.map((r) => ({
-      nomorRegistrasi: r.nomorRegistrasi,
-      nama: r.nama,
-      nik: r.nik,
-      tempatLahir: r.tempatLahir,
-      tanggalLahir: r.tanggalLahir,
-      jenisKelamin: r.jenisKelamin,
-      alamat: r.alamat,
-      blokHunian: r.blokHunian,
-      status: r.status,
-      tanggalMasuk: r.tanggalMasuk,
-      tanggalBebas: r.tanggalBebas,
-      jenisPerkara: r.jenisPerkara,
-      saldoAwal: r.saldoAwal,
-      catatan: r.catatan,
+      nomorRegistrasi: r.nomorRegistrasi.trim(),
+      nama: r.nama.trim(),
+      nik: r.nik || '',
+      tempatLahir: r.tempatLahir || '',
+      tanggalLahir: r.tanggalLahir || '',
+      jenisKelamin: r.jenisKelamin || '',
+      alamat: r.alamat || '',
+      blokHunian: r.blokHunian || 'Blok Mapenaling 01',
+      status: r.status || 'Aktif',
+      tanggalMasuk: r.tanggalMasuk || fallbackToday,
+      tanggalBebas: r.tanggalBebas || '',
+      jenisPerkara: r.jenisPerkara || '',
+      saldoAwal: typeof r.saldoAwal === 'number' && !isNaN(r.saldoAwal) ? r.saldoAwal : 0,
+      catatan: r.catatan || '',
     }));
 
     setImportProgress(50);
@@ -774,29 +775,77 @@ export const ImportExcelWbp: React.FC = () => {
 
       {/* Result Banner if already imported */}
       {importResult && (
-        <div className="bg-emerald-50 border border-emerald-300 p-6 rounded-3xl shadow-xs space-y-4">
+        <div
+          className={`p-6 rounded-3xl shadow-xs space-y-4 border ${
+            importResult.success
+              ? importResult.failedCount > 0
+                ? 'bg-amber-50/90 border-amber-300'
+                : 'bg-emerald-50 border border-emerald-300'
+              : 'bg-rose-50 border border-rose-300'
+          }`}
+        >
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-2xl bg-emerald-600 text-white flex items-center justify-center shrink-0 shadow-md">
-                <CheckCircle className="w-6 h-6" />
+              <div
+                className={`w-12 h-12 rounded-2xl text-white flex items-center justify-center shrink-0 shadow-md ${
+                  importResult.success
+                    ? importResult.failedCount > 0
+                      ? 'bg-amber-600'
+                      : 'bg-emerald-600'
+                    : 'bg-rose-600'
+                }`}
+              >
+                {importResult.success ? (
+                  importResult.failedCount > 0 ? (
+                    <AlertTriangle className="w-6 h-6" />
+                  ) : (
+                    <CheckCircle className="w-6 h-6" />
+                  )
+                ) : (
+                  <XCircle className="w-6 h-6" />
+                )}
               </div>
               <div>
-                <h3 className="text-lg font-bold text-emerald-950">Proses Import Massal Selesai!</h3>
-                <p className="text-xs text-emerald-700">{importResult.message}</p>
+                <h3
+                  className={`text-lg font-bold ${
+                    importResult.success
+                      ? importResult.failedCount > 0
+                        ? 'text-amber-950'
+                        : 'text-emerald-950'
+                      : 'text-rose-950'
+                  }`}
+                >
+                  {importResult.success
+                    ? importResult.failedCount > 0
+                      ? 'Import Selesai dengan Beberapa Peringatan'
+                      : 'Proses Import Massal Berhasil Selesai!'
+                    : 'Proses Import Massal Mengalami Kendala'}
+                </h3>
+                <p
+                  className={`text-xs ${
+                    importResult.success
+                      ? importResult.failedCount > 0
+                        ? 'text-amber-800'
+                        : 'text-emerald-700'
+                      : 'text-rose-700'
+                  }`}
+                >
+                  {importResult.message}
+                </p>
               </div>
             </div>
 
             <div className="flex items-center gap-2.5 flex-wrap">
               <button
                 onClick={handleDownloadResultReport}
-                className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition-all shadow-md flex items-center gap-1.5 cursor-pointer"
+                className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition-all shadow-md flex items-center gap-1.5 cursor-pointer"
               >
                 <Download className="w-3.5 h-3.5" />
                 <span>Unduh Laporan Hasil (.xlsx)</span>
               </button>
               <button
                 onClick={() => setActiveAdminTab('wbp')}
-                className="px-4 py-2 rounded-xl bg-white hover:bg-emerald-100 text-emerald-900 border border-emerald-300 text-xs font-semibold transition-all flex items-center gap-1.5 cursor-pointer"
+                className="px-4 py-2 rounded-xl bg-white hover:bg-slate-100 text-slate-800 border border-slate-300 text-xs font-semibold transition-all flex items-center gap-1.5 cursor-pointer"
               >
                 <span>Buka Data Warga Binaan</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -811,7 +860,7 @@ export const ImportExcelWbp: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
-            <div className="bg-white p-3.5 rounded-2xl border border-emerald-200">
+            <div className="bg-white p-3.5 rounded-2xl border border-slate-200">
               <div className="text-[11px] text-slate-500 font-medium">Baris Diproses</div>
               <div className="text-xl font-bold text-slate-800">{importResult.totalRows}</div>
             </div>
@@ -819,11 +868,11 @@ export const ImportExcelWbp: React.FC = () => {
               <div className="text-[11px] text-emerald-600 font-medium">Baru Disimpan</div>
               <div className="text-xl font-bold text-emerald-700">{importResult.insertedCount}</div>
             </div>
-            <div className="bg-white p-3.5 rounded-2xl border border-emerald-200">
+            <div className="bg-white p-3.5 rounded-2xl border border-blue-200">
               <div className="text-[11px] text-blue-600 font-medium">Data Diperbarui</div>
               <div className="text-xl font-bold text-blue-700">{importResult.updatedCount}</div>
             </div>
-            <div className="bg-white p-3.5 rounded-2xl border border-emerald-200">
+            <div className="bg-white p-3.5 rounded-2xl border border-slate-200">
               <div className="text-[11px] text-amber-600 font-medium">Dilewati / Gagal</div>
               <div className="text-xl font-bold text-amber-700">
                 {importResult.skippedCount + importResult.failedCount}
