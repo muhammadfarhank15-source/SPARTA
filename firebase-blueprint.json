@@ -1,0 +1,164 @@
+{
+  "entities": {
+    "warga_binaan": {
+      "title": "Warga Binaan",
+      "description": "Data identitas perorangan, nomor registrasi, blok hunian, dan saldo uang digital WBP",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "nomorRegistrasi": { "type": "string", "maxLength": 64 },
+        "nama": { "type": "string", "maxLength": 128 },
+        "nik": { "type": "string", "maxLength": 32 },
+        "tempatLahir": { "type": "string", "maxLength": 100 },
+        "tanggalLahir": { "type": "string", "maxLength": 30 },
+        "jenisKelamin": { "type": "string", "maxLength": 20 },
+        "alamat": { "type": "string", "maxLength": 250 },
+        "blokHunian": { "type": "string", "maxLength": 100 },
+        "status": { "type": "string", "enum": ["Aktif", "Bebas", "Mutasi", "Non-Aktif"] },
+        "tanggalBebas": { "type": "string", "maxLength": 30 },
+        "uptTujuan": { "type": "string", "maxLength": 150 },
+        "noSkMutasi": { "type": "string", "maxLength": 100 },
+        "jenisPerkara": { "type": "string", "maxLength": 150 },
+        "saldoAwal": { "type": "number" },
+        "saldoBerjalan": { "type": "number" },
+        "tanggalMasuk": { "type": "string", "maxLength": 30 },
+        "catatan": { "type": "string", "maxLength": 500 },
+        "fotoUrl": { "type": "string", "maxLength": 500 },
+        "updatedAt": { "type": "string", "maxLength": 60 }
+      },
+      "required": ["nomorRegistrasi", "nama", "blokHunian", "status", "saldoBerjalan", "tanggalMasuk"]
+    },
+    "transaksi_uang": {
+      "title": "Transaksi Keuangan",
+      "description": "Pencatatan titipan masuk dan pembelanjaan kantin/EDC",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "nomorTransaksi": { "type": "string", "maxLength": 64 },
+        "tanggal": { "type": "string", "maxLength": 30 },
+        "waktuPencatatan": { "type": "string", "maxLength": 40 },
+        "wbpId": { "type": "string", "maxLength": 128 },
+        "namaWbp": { "type": "string", "maxLength": 128 },
+        "jenisTransaksi": { "type": "string", "enum": ["Uang Masuk", "Uang Keluar"] },
+        "kategori": { "type": "string", "maxLength": 100 },
+        "nominal": { "type": "number" },
+        "sumberAtauTujuan": { "type": "string", "maxLength": 200 },
+        "keterangan": { "type": "string", "maxLength": 500 },
+        "petugas": { "type": "string", "maxLength": 100 },
+        "saldoSetelahTransaksi": { "type": "number" },
+        "waktuPerubahan": { "type": "string", "maxLength": 40 }
+      },
+      "required": ["nomorTransaksi", "tanggal", "wbpId", "namaWbp", "jenisTransaksi", "kategori", "nominal", "petugas", "saldoSetelahTransaksi"]
+    },
+    "laporan_bulanan": {
+      "title": "Laporan Rekap Bulanan",
+      "description": "Rekapitulasi pembukuan dan tutup buku bulanan",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "periode": { "type": "string", "maxLength": 60 },
+        "tahun": { "type": "number" },
+        "bulan": { "type": "number" },
+        "status": { "type": "string", "enum": ["Bulan Berjalan", "Tutup Buku Diarsipkan"] },
+        "jumlahTransaksi": { "type": "number" },
+        "totalMasuk": { "type": "number" },
+        "totalKeluar": { "type": "number" },
+        "saldoAkhir": { "type": "number" },
+        "tanggalTutupBuku": { "type": "string", "maxLength": 40 },
+        "petugasTutupBuku": { "type": "string", "maxLength": 100 }
+      },
+      "required": ["periode", "tahun", "bulan", "status", "jumlahTransaksi", "totalMasuk", "totalKeluar", "saldoAkhir"]
+    },
+    "audit_log": {
+      "title": "Audit Log",
+      "description": "Log aktivitas sistem dan audit trail perubahan",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "timestamp": { "type": "string", "maxLength": 40 },
+        "petugas": { "type": "string", "maxLength": 100 },
+        "aksi": { "type": "string", "maxLength": 100 },
+        "modul": { "type": "string", "maxLength": 100 },
+        "rincian": { "type": "string", "maxLength": 1000 },
+        "tipe": { "type": "string", "enum": ["INFO", "WARNING", "DANGER", "SUCCESS"] }
+      },
+      "required": ["timestamp", "petugas", "aksi", "modul", "rincian", "tipe"]
+    },
+    "pengaturan_upt": {
+      "title": "Pengaturan UPT dan Portal",
+      "description": "Konfigurasi instansi UPT, teks portal, dan preferensi tampilan",
+      "type": "object",
+      "properties": {
+        "namaUpt": { "type": "string", "maxLength": 200 },
+        "namaAplikasi": { "type": "string", "maxLength": 100 },
+        "slogan": { "type": "string", "maxLength": 200 },
+        "kementerian": { "type": "string", "maxLength": 200 },
+        "kanwil": { "type": "string", "maxLength": 200 },
+        "alamat": { "type": "string", "maxLength": 300 },
+        "kota": { "type": "string", "maxLength": 150 },
+        "kepalaUptNama": { "type": "string", "maxLength": 150 },
+        "kepalaUptNip": { "type": "string", "maxLength": 50 },
+        "bendaharaNama": { "type": "string", "maxLength": 150 },
+        "bendaharaNip": { "type": "string", "maxLength": 50 },
+        "logoUrl": { "type": "string", "maxLength": 500 },
+        "googleSheetsUrl": { "type": "string", "maxLength": 500 },
+        "syncStatus": { "type": "string", "maxLength": 50 },
+        "lastSyncTime": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["namaUpt", "namaAplikasi", "kementerian"]
+    },
+    "kategori": {
+      "title": "Kategori Transaksi",
+      "description": "Master kategori uang masuk dan uang keluar",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "nama": { "type": "string", "maxLength": 100 },
+        "jenis": { "type": "string", "enum": ["Uang Masuk", "Uang Keluar"] }
+      },
+      "required": ["nama", "jenis"]
+    },
+    "admin_user": {
+      "title": "Admin User",
+      "description": "Daftar ID user Firebase Auth yang memiliki hak akses administrator",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string", "maxLength": 150 },
+        "role": { "type": "string", "enum": ["admin", "superadmin"] },
+        "displayName": { "type": "string", "maxLength": 150 },
+        "createdAt": { "type": "string", "maxLength": 40 }
+      },
+      "required": ["email", "role"]
+    }
+  },
+  "firestore": {
+    "/warga_binaan/{wbpId}": {
+      "schema": "warga_binaan",
+      "description": "Koleksi data warga binaan dan saldo berjalan"
+    },
+    "/transaksi_uang/{trxId}": {
+      "schema": "transaksi_uang",
+      "description": "Koleksi pencatatan transaksi masuk dan pembelanjaan kantin"
+    },
+    "/laporan_bulanan/{reportId}": {
+      "schema": "laporan_bulanan",
+      "description": "Koleksi arsip laporan bulanan dan tutup buku"
+    },
+    "/audit_logs/{logId}": {
+      "schema": "audit_log",
+      "description": "Koleksi log audit aktivitas pengelola"
+    },
+    "/pengaturan_upt/{configId}": {
+      "schema": "pengaturan_upt",
+      "description": "Dokumen konfigurasi instansi UPT dan teks portal"
+    },
+    "/kategori/{catId}": {
+      "schema": "kategori",
+      "description": "Koleksi master data kategori transaksi"
+    },
+    "/admins/{adminUid}": {
+      "schema": "admin_user",
+      "description": "Dokumen verifikasi hak akses admin terdaftar"
+    }
+  }
+}

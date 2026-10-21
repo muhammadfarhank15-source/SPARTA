@@ -1,0 +1,397 @@
+{
+  "meta": {
+    "version": 4,
+    "lastUpdated": "2026-10-21T05:56:52.264Z",
+    "initializedAt": "2026-10-21T05:56:17.967Z"
+  },
+  "uptSettings": {
+    "namaUpt": "RUMAH TAHANAN NEGARA KELAS IIB JENEPONTO",
+    "namaAplikasi": "SPARTA RUJENTO",
+    "slogan": "STRATEGI PENGAWASAN TRANSAKSI KEUANGAN YANG TERINTEGRASI",
+    "kementerian": "KEMENTERIAN IMIGRASI DAN PEMASYARAKATAN REPUBLIK INDONESIA",
+    "ditjen": "DIREKTORAT JENDERAL PEMASYARAKATAN",
+    "kanwil": "KANTOR WILAYAH SULAWESI SELATAN",
+    "alamat": "Jl. Pahlawan No. 45, Empoang, Kec. Binamu",
+    "kota": "Kabupaten Jeneponto, Sulawesi Selatan 92311",
+    "kepalaUptNama": "Adam Ridwansyah, A.Md.IP., S.H., M.Si",
+    "kepalaUptNip": "198104052000121002",
+    "bendaharaNama": "Anre Sanri Krg Gising",
+    "bendaharaNip": "-",
+    "logoUrl": "/assets/logo.png",
+    "adminPassword": "adminpassword123",
+    "googleSheetsUrl": "",
+    "syncStatus": "Lokal Mode",
+    "lastSyncTime": "2026-10-21 05:56:17",
+    "publicPortalSettings": {
+      "showTotalSaldo": true,
+      "showMonthlyVolume": true,
+      "allowFamilyChecker": true,
+      "showRecentPublicStats": true
+    },
+    "portalContent": {
+      "heroJudulBaris1": "STRATEGI PENGAWASAN TRANSAKSI KEUANGAN YANG TERINTEGRASI",
+      "heroJudulBaris2": "RUMAH TAHANAN NEGARA KELAS IIB JENEPONTO",
+      "heroDeskripsi": "Portal informasi dan pengelolaan transaksi keuangan warga binaan secara transparan dan terintegrasi.",
+      "heroBadgeStatus": "Sistem Aktif & Terlindungi",
+      "heroCtaButton": "Pengecekan Keuangan WBP Khusus Keluarga (Cek Nama)",
+      "portalUmumBadge": "Akses Publik & Keluarga",
+      "portalUmumPill": "Tanpa Login",
+      "portalUmumJudul": "PORTAL UMUM",
+      "portalUmumDeskripsi": "Dapat diakses oleh siapa saja melalui tautan aplikasi. Tinjau ringkasan saldo transparansi publik, grafik mutasi, dan lakukan pengecekan saldo titipan warga binaan tanpa login.",
+      "portalUmumFitur1": "Hanya baca-saja (tidak dapat mengubah data)",
+      "portalUmumFitur2": "Data pribadi & log rahasia terlindungi aman",
+      "portalUmumButtonText": "Buka Portal Umum",
+      "portalAdminBadge": "Khusus Kasir & Pengelola",
+      "portalAdminPill": "Wajib Login",
+      "portalAdminJudul": "PORTAL ADMIN",
+      "portalAdminDeskripsi": "Masuk ke Dasbor Manajemen Keuangan Terpadu. Kelola pendaftaran WBP, input uang titipan masuk, pembelanjaan EDC kantin, reset angka, tutup buku, dan sinkronisasi Google Sheets.",
+      "portalAdminFitur1": "Proteksi autentikasi akun Administrator UPT",
+      "portalAdminFitur2": "Dilengkapi rekam jejak Audit Trail otomatis",
+      "portalAdminButtonText": "Masuk ke Portal Admin",
+      "transparansiLabel": "Status Transparansi Keuangan Terbuka:",
+      "transparansiButtonText": "Lihat Rincian Publik →",
+      "portalUmumHeaderSub": "STRATEGI PENGAWASAN TRANSAKSI KEUANGAN YANG TERINTEGRASI • RUMAH TAHANAN NEGARA KELAS IIB JENEPONTO",
+      "portalUmumStatusKoneksi": "Koneksi Sistem: Aktif",
+      "tabRingkasanLabel": "Ringkasan Keuangan Publik",
+      "tabCekKeluargaLabel": "Pemeriksaan Saldo WBP (Khusus Keluarga)",
+      "tabLaporanBulananLabel": "Laporan Transaksi Setiap Bulan",
+      "cardSaldoJudul": "Total Saldo Titipan",
+      "cardSaldoDesc": "Saldo aktif seluruh warga binaan",
+      "cardMasukJudul": "Total Titipan Masuk",
+      "cardMasukDesc": "Akumulasi setoran & transfer keluarga",
+      "cardKeluarJudul": "Total Pembelanjaan EDC",
+      "cardKeluarDesc": "Total pembelanjaan kantin & kebutuhan",
+      "cardVolumeJudul": "Volume Transaksi",
+      "cardVolumeDesc": "Pencatatan real-time kasir EDC",
+      "chartBelanjaJudul": "Proporsi Belanja Kantin Berdasarkan Kategori",
+      "kebijakanJudul": "Kebijakan Transparansi Keuangan Uang Digital",
+      "kebijakanDeskripsi": "Sistem ini dibangun untuk menjamin transparansi, ketertiban, dan keadilan dalam peredaran uang digital (cashless system) di lingkungan UPT.",
+      "kebijakanPoin1": "Mencegah peredaran uang tunai ilegal di dalam blok hunian pemasyarakatan.",
+      "kebijakanPoin2": "Pihak keluarga dapat memastikan setiap rupiah titipan diterima utuh dan digunakan sesuai kebutuhan.",
+      "kebijakanPoin3": "Seluruh transaksi tercatat otomatis ke database Google Sheets dan dicadangkan secara berkala.",
+      "kebijakanCtaTeks": "Ingin memeriksa saldo keluarga Anda?",
+      "kebijakanCtaButton": "Buka Cek Saldo WBP →",
+      "laporanBulananJudul": "Informasi Jumlah Laporan Transaksi Setiap Bulan",
+      "laporanBulananDeskripsi": "Rekapitulasi volume transaksi bulanan, total penerimaan titipan, belanja, dan saldo akhir periode.",
+      "cekKeluargaBadge": "Layanan Transparansi Keluarga WBP",
+      "cekKeluargaJudul": "Pengecekan Saldo & Transaksi Warga Binaan",
+      "cekKeluargaDeskripsi": "Pihak keluarga dapat memantau kepastian saldo titipan uang digital yang masuk dan penggunaan pembelanjaan harian warga binaan secara aman dan transparan.",
+      "cekKeluargaSearchLabel": "Cari Berdasarkan Nama Warga Binaan atau Nomor Registrasi:",
+      "cekKeluargaSearchPlaceholder": "Ketik nama WBP (contoh: Andi Mallombassang atau nomor registrasi BI/2026/042)...",
+      "cekKeluargaCatatanPrivasi": "Informasi Privasi & Keamanan: Seluruh nominal uang masuk bersumber dari titipan resmi keluarga yang disahkan petugas kasir. Jika terdapat ketidaksesuaian transaksi, pihak keluarga dapat berkonsultasi langsung ke Loket Layanan Keuangan.",
+      "footerTeksLanding": "Dashboard Transaksi Uang Digital & EDC.",
+      "footerTeksPortal": "Portal Transparansi Publik"
+    }
+  },
+  "categories": [
+    {
+      "id": "cat-m-1",
+      "nama": "Setoran Tunai Keluarga",
+      "jenis": "Uang Masuk"
+    },
+    {
+      "id": "cat-m-2",
+      "nama": "Transfer Bank (Virtual Account)",
+      "jenis": "Uang Masuk"
+    },
+    {
+      "id": "cat-m-3",
+      "nama": "Pengembalian Dana Titipan",
+      "jenis": "Uang Masuk"
+    },
+    {
+      "id": "cat-m-4",
+      "nama": "Upah Pembinaan Kemandirian",
+      "jenis": "Uang Masuk"
+    },
+    {
+      "id": "cat-m-5",
+      "nama": "Pemasukan Lainnya",
+      "jenis": "Uang Masuk"
+    },
+    {
+      "id": "cat-k-1",
+      "nama": "Belanja Makanan & Kantin",
+      "jenis": "Uang Keluar"
+    },
+    {
+      "id": "cat-k-2",
+      "nama": "Belanja Kebutuhan Harian",
+      "jenis": "Uang Keluar"
+    },
+    {
+      "id": "cat-k-3",
+      "nama": "Pembelian Perlengkapan Mandi",
+      "jenis": "Uang Keluar"
+    },
+    {
+      "id": "cat-k-4",
+      "nama": "Pembelian Air Minum Galon",
+      "jenis": "Uang Keluar"
+    },
+    {
+      "id": "cat-k-5",
+      "nama": "Pengeluaran Lainnya",
+      "jenis": "Uang Keluar"
+    }
+  ],
+  "wbpList": [
+    {
+      "id": "wbp-001",
+      "nomorRegistrasi": "BI/2026/042",
+      "nama": "Andi Mallombassang Karaeng",
+      "blokHunian": "Blok Hasanuddin B-1",
+      "status": "Aktif",
+      "saldoAwal": 1000000,
+      "saldoBerjalan": 1850000,
+      "tanggalMasuk": "2026-02-14",
+      "catatan": "Draft autosave 60 detik berhasil diuji.",
+      "updatedAt": "2026-10-21T05:56:52.264Z",
+      "nik": "7304011234560001"
+    },
+    {
+      "id": "wbp-002",
+      "nomorRegistrasi": "BII/2025/118",
+      "nama": "Daeng Bella",
+      "blokHunian": "Blok Hunian Tipikor B-3",
+      "status": "Aktif",
+      "saldoAwal": 2000000,
+      "saldoBerjalan": 1350000,
+      "tanggalMasuk": "2025-08-10",
+      "catatan": "Belanja kantin harian melalui sistem EDC.",
+      "updatedAt": "2026-10-21T05:56:17.967Z"
+    },
+    {
+      "id": "wbp-003",
+      "nomorRegistrasi": "BIII/2026/089",
+      "nama": "Muh. Rusdi",
+      "blokHunian": "Blok Hasanuddin A-1",
+      "status": "Aktif",
+      "saldoAwal": 500000,
+      "saldoBerjalan": 520000,
+      "tanggalMasuk": "2026-05-20",
+      "catatan": "Menerima upah kerja bengkel kerja pemandirian.",
+      "updatedAt": "2026-10-21T05:56:17.967Z"
+    },
+    {
+      "id": "wbp-004",
+      "nomorRegistrasi": "BI/2026/015",
+      "nama": "Syamsul Bahri",
+      "blokHunian": "Paviliun Bougenville 04",
+      "status": "Aktif",
+      "saldoAwal": 1200000,
+      "saldoBerjalan": 2100000,
+      "tanggalMasuk": "2026-01-08",
+      "catatan": "Titipan dari keluarga di luar daerah via transfer.",
+      "updatedAt": "2026-10-21T05:56:17.967Z"
+    },
+    {
+      "id": "wbp-005",
+      "nomorRegistrasi": "BII/2024/204",
+      "nama": "Basri Daeng Kulle",
+      "blokHunian": "Blok Hasanuddin A-4",
+      "status": "Bebas",
+      "tanggalBebas": "2026-09-15",
+      "saldoAwal": 0,
+      "saldoBerjalan": 0,
+      "tanggalMasuk": "2024-11-01",
+      "catatan": "Bebas Murni. Sisa saldo telah diserahkan tunai saat pelepasan.",
+      "updatedAt": "2026-10-21T05:56:17.967Z"
+    },
+    {
+      "id": "wbp-006",
+      "nomorRegistrasi": "BI/2025/302",
+      "nama": "Ardiansyah",
+      "blokHunian": "Blok Mapenaling 01",
+      "status": "Mutasi",
+      "uptTujuan": "Lapas Kelas IIA Bulukumba",
+      "noSkMutasi": "W23.PAS-04.PK.01-889",
+      "saldoAwal": 0,
+      "saldoBerjalan": 0,
+      "tanggalMasuk": "2025-10-12",
+      "catatan": "Dimutasi sesuai SK Kemenkumham Kanwil Sulsel.",
+      "updatedAt": "2026-10-21T05:56:17.967Z"
+    }
+  ],
+  "transactions": [
+    {
+      "id": "trx-101",
+      "nomorTransaksi": "TR-MSK-20261002-1044",
+      "tanggal": "2026-10-02",
+      "waktuPencatatan": "2026-10-02 09:15:30",
+      "wbpId": "wbp-001",
+      "namaWbp": "Andi Mallombassang",
+      "jenisTransaksi": "Uang Masuk",
+      "kategori": "Setoran Tunai Keluarga",
+      "nominal": 1000000,
+      "sumberAtauTujuan": "Hj. Rosmina (Ibu Kandung)",
+      "keterangan": "Titipan kebutuhan uang digital bulan Oktober",
+      "petugas": "Bripda Arman (Kasir Rutan)",
+      "saldoSetelahTransaksi": 2000000
+    },
+    {
+      "id": "trx-102",
+      "nomorTransaksi": "TR-KLR-20261004-2011",
+      "tanggal": "2026-10-04",
+      "waktuPencatatan": "2026-10-04 11:30:15",
+      "wbpId": "wbp-001",
+      "namaWbp": "Andi Mallombassang",
+      "jenisTransaksi": "Uang Keluar",
+      "kategori": "Belanja Makanan & Kantin",
+      "nominal": 75000,
+      "sumberAtauTujuan": "Kantin Koperasi Rutan",
+      "keterangan": "Belanja makan siang & minuman botol via mesin EDC",
+      "petugas": "Anre Sanri Krg Gising (Bendahara)",
+      "saldoSetelahTransaksi": 1925000
+    },
+    {
+      "id": "trx-103",
+      "nomorTransaksi": "TR-KLR-20261006-2022",
+      "tanggal": "2026-10-06",
+      "waktuPencatatan": "2026-10-06 14:10:00",
+      "wbpId": "wbp-001",
+      "namaWbp": "Andi Mallombassang",
+      "jenisTransaksi": "Uang Keluar",
+      "kategori": "Pembelian Perlengkapan Mandi",
+      "nominal": 75000,
+      "sumberAtauTujuan": "Koperasi Lapas / Toko Rutan",
+      "keterangan": "Sabun, sampo, pasta gigi & deterjen cuci baju",
+      "petugas": "Bripda Arman (Kasir Rutan)",
+      "saldoSetelahTransaksi": 1850000
+    },
+    {
+      "id": "trx-104",
+      "nomorTransaksi": "TR-MSK-20261005-1088",
+      "tanggal": "2026-10-05",
+      "waktuPencatatan": "2026-10-05 10:20:00",
+      "wbpId": "wbp-002",
+      "namaWbp": "Daeng Bella",
+      "jenisTransaksi": "Uang Masuk",
+      "kategori": "Transfer Bank (Virtual Account)",
+      "nominal": 500000,
+      "sumberAtauTujuan": "Transfer BRI VA: Muh. Tahir (Adik)",
+      "keterangan": "Top up saldo kartu belanja WBP",
+      "petugas": "Anre Sanri Krg Gising (Bendahara)",
+      "saldoSetelahTransaksi": 2500000
+    },
+    {
+      "id": "trx-105",
+      "nomorTransaksi": "TR-KLR-20261008-2055",
+      "tanggal": "2026-10-08",
+      "waktuPencatatan": "2026-10-08 16:45:10",
+      "wbpId": "wbp-002",
+      "namaWbp": "Daeng Bella",
+      "jenisTransaksi": "Uang Keluar",
+      "kategori": "Belanja Kebutuhan Harian",
+      "nominal": 1150000,
+      "sumberAtauTujuan": "Kantin Koperasi Rutan",
+      "keterangan": "Belanja perlengkapan harian & makanan tambahan",
+      "petugas": "Bripda Arman (Kasir Rutan)",
+      "saldoSetelahTransaksi": 1350000
+    },
+    {
+      "id": "trx-106",
+      "nomorTransaksi": "TR-MSK-20261009-1120",
+      "tanggal": "2026-10-09",
+      "waktuPencatatan": "2026-10-09 13:00:00",
+      "wbpId": "wbp-003",
+      "namaWbp": "Muh. Rusdi",
+      "jenisTransaksi": "Uang Masuk",
+      "kategori": "Upah Pembinaan Kemandirian",
+      "nominal": 120000,
+      "sumberAtauTujuan": "Kas Seksi Bimbingan Kerja Rutan",
+      "keterangan": "Premi hasil kerajinan rotan & pertukangan",
+      "petugas": "Anre Sanri Krg Gising (Bendahara)",
+      "saldoSetelahTransaksi": 620000
+    },
+    {
+      "id": "trx-107",
+      "nomorTransaksi": "TR-KLR-20261011-2090",
+      "tanggal": "2026-10-11",
+      "waktuPencatatan": "2026-10-11 10:05:40",
+      "wbpId": "wbp-003",
+      "namaWbp": "Muh. Rusdi",
+      "jenisTransaksi": "Uang Keluar",
+      "kategori": "Pembelian Air Minum Galon",
+      "nominal": 100000,
+      "sumberAtauTujuan": "Depot Air Minum Rutan",
+      "keterangan": "Isi ulang galon kamar dan kebutuhan minum",
+      "petugas": "Bripda Arman (Kasir Rutan)",
+      "saldoSetelahTransaksi": 520000
+    }
+  ],
+  "monthlyReports": [
+    {
+      "id": "rep-2026-09",
+      "periode": "September 2026",
+      "tahun": 2026,
+      "bulan": 9,
+      "status": "Tutup Buku Diarsipkan",
+      "jumlahTransaksi": 142,
+      "totalMasuk": 48500000,
+      "totalKeluar": 43200000,
+      "saldoAkhir": 5300000,
+      "tanggalTutupBuku": "2026-09-30 23:59:00",
+      "petugasTutupBuku": "Anre Sanri Krg Gising (Bendahara)"
+    },
+    {
+      "id": "rep-2026-08",
+      "periode": "Agustus 2026",
+      "tahun": 2026,
+      "bulan": 8,
+      "status": "Tutup Buku Diarsipkan",
+      "jumlahTransaksi": 128,
+      "totalMasuk": 42000000,
+      "totalKeluar": 39500000,
+      "saldoAkhir": 2500000,
+      "tanggalTutupBuku": "2026-08-31 23:59:00",
+      "petugasTutupBuku": "Anre Sanri Krg Gising (Bendahara)"
+    }
+  ],
+  "auditLogs": [
+    {
+      "id": "log-1792562212264-962",
+      "timestamp": "2026-10-21 05:56:52",
+      "petugas": "Administrator Kasir",
+      "aksi": "Autosave Sistem 60 Detik",
+      "modul": "Autosave Otomatis",
+      "rincian": "Autosave berkala berhasil menyimpan perubahan: Profil WBP Andi Mallombassang Karaeng.",
+      "tipe": "INFO"
+    },
+    {
+      "id": "log-1792562202441-261",
+      "timestamp": "2026-10-21 05:56:42",
+      "petugas": "Administrator Kasir",
+      "aksi": "Ubah Data WBP",
+      "modul": "Data Warga Binaan",
+      "rincian": "Memperbarui identitas & profil warga binaan: Andi Mallombassang Karaeng (BI/2026/042), Penempatan: Blok Hasanuddin B-1, Status: Aktif.",
+      "tipe": "INFO"
+    },
+    {
+      "id": "log-1792562198156-231",
+      "timestamp": "2026-10-21 05:56:38",
+      "petugas": "Administrator Kasir",
+      "aksi": "Login Admin Berhasil",
+      "modul": "Autentikasi Server",
+      "rincian": "Admin login berhasil dari perangkat: Web Browser. Sesi aktif: adm-session-1792562198156-j0m622j.",
+      "tipe": "SUCCESS"
+    },
+    {
+      "id": "log-init-1",
+      "timestamp": "2026-10-21 05:56:17",
+      "petugas": "Sistem SPARTA RUJENTO",
+      "aksi": "Inisialisasi Database Permanen",
+      "modul": "Database Utama",
+      "rincian": "Basis data permanen terpusat berhasil diaktifkan dengan dukungan autosave 60s dan sinkronisasi multi-perangkat.",
+      "tipe": "SUCCESS"
+    }
+  ],
+  "activeSessions": {
+    "adm-session-1792562198156-j0m622j": {
+      "token": "adm-session-1792562198156-j0m622j",
+      "created": "2026-10-21T05:56:38.156Z",
+      "lastSeen": "2026-10-21T05:56:52.264Z",
+      "adminName": "Administrator Kasir"
+    }
+  }
+}

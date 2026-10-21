@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+@layer utilities {
+  .font-montserrat {
+    font-family: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+}
+
+.font-montserrat-extrabold {
+  font-family: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  font-weight: 800 !important;
+}
+
+/* Atmospheric Wind & Breeze Animations */
+@keyframes windBreezeDrift {
+  0% {
+    transform: scale(1.04) translate(0px, 0px);
+  }
+  30% {
+    transform: scale(1.07) translate(-10px, -6px);
+  }
+  65% {
+    transform: scale(1.05) translate(8px, 4px);
+  }
+  85% {
+    transform: scale(1.08) translate(-4px, 6px);
+  }
+  100% {
+    transform: scale(1.04) translate(0px, 0px);
+  }
+}
+
+@keyframes windCloudDrift1 {
+  0% {
+    transform: translateX(-8%) translateY(-2%);
+  }
+  50% {
+    transform: translateX(8%) translateY(3%);
+  }
+  100% {
+    transform: translateX(-8%) translateY(-2%);
+  }
+}
+
+@keyframes windCloudDrift2 {
+  0% {
+    transform: translateX(10%) translateY(2%);
+  }
+  50% {
+    transform: translateX(-10%) translateY(-2%);
+  }
+  100% {
+    transform: translateX(10%) translateY(2%);
+  }
+}
+
+.animate-wind-breeze {
+  animation: windBreezeDrift 24s ease-in-out infinite alternate;
+}
+
+.animate-cloud-drift-1 {
+  animation: windCloudDrift1 30s ease-in-out infinite alternate;
+}
+
+.animate-cloud-drift-2 {
+  animation: windCloudDrift2 42s ease-in-out infinite alternate;
+}

@@ -1,0 +1,540 @@
+Buatkan sebuah aplikasi web Dashboard Transaksi Uang Digital atau EDC yang modern, profesional, responsif, mudah digunakan, dan dapat diedit. Aplikasi ini digunakan untuk mencatat, memantau, dan mengelola transaksi uang digital secara terstruktur dan transparan.
+Aplikasi harus terhubung dengan Google Sheets sebagai database utama, sehingga semua data transaksi dapat disimpan, dibaca, ditambahkan, diedit, dan dihapus melalui dashboard maupun diperbarui melalui spreadsheet.
+
+    DESAIN DASHBOARD
+    Buat desain dashboard dengan ketentuan:
+    • Tampilan profesional seperti aplikasi keuangan modern.
+    • Warna utama navy blue, putih, abu-abu, dan aksen hijau untuk uang masuk serta merah untuk uang keluar.
+    • Sidebar menu di sebelah kiri.
+    • Dashboard utama menampilkan ringkasan keuangan dalam kartu statistic dan bisa mengecek data transaksi per warga binaan dengan cara menginput Namanya saja
+    • Grafik interaktif dan tabel transaksi.
+    • Tampilan responsif untuk komputer, tablet, dan HP.
+    • Gunakan bahasa Indonesia.
+    • Format mata uang Rupiah (Rp), dengan pemisah ribuan yang sesuai.
+
+    RINGKASAN KEUANGAN
+    Pada halaman utama, tampilkan kartu statistik berikut:
+
+    Total Uang Masuk: jumlah seluruh transaksi pemasukan. Dan pemasukan per warga binaan
+
+    Total Uang Keluar: jumlah seluruh transaksi pengeluaran. Dan pengeluaran per warga binaan
+
+    Total Saldo Saat Ini: saldo awal ditambah seluruh uang masuk dikurangi seluruh uang keluar dan per warga binaan
+
+    Jumlah Transaksi: total transaksi yang tercatat dan per warga binaan
+
+    Pengeluaran Bulan Ini: total uang keluar pada bulan berjalan dan per warga binaan
+    Semua angka harus dihitung secara otomatis berdasarkan data transaksi di Google Sheets. Jangan menggunakan angka contoh sebagai data keuangan sebenarnya.
+    Buat google sheetsnya menjadi spreadsheet yang memiliki tabel yang rapih sesuai datanya
+
+    FORM INPUT TRANSAKSI
+    Buat formulir untuk menambah transaksi baru dengan kolom:
+    • Tanggal transaksi.
+    • Nomor transaksi otomatis dan unik.
+    • Nama pemilik atau penerima uang.
+    • Jenis transaksi: Uang Masuk atau Uang Keluar.
+    • Kategori transaksi.
+    • Nominal transaksi.
+    • Sumber atau tujuan transaksi.
+    • Keterangan transaksi.
+    • Nama petugas pencatat.
+    Kategori uang masuk meliputi:
+    • Setoran uang.
+    • Transfer masuk.
+    • Pengembalian dana.
+    • Pemasukan lainnya.
+    Kategori uang keluar meliputi:
+    • Belanja kebutuhan.
+    • Pembelian makanan.
+    • Pembelian perlengkapan.
+    • Pengeluaran lainnya.
+    Sediakan fitur untuk menambah kategori baru sesuai kebutuhan.
+
+    TABEL RIWAYAT TRANSAKSI
+    Tampilkan seluruh transaksi dalam tabel yang rapi dengan kolom:
+    • No.
+    • Tanggal.
+    • Nomor transaksi.
+    • Nama pemilik atau penerima.
+    • Jenis transaksi.
+    • Kategori.
+    • Uang masuk.
+    • Uang keluar.
+    • Saldo setelah transaksi.
+    • Keterangan.
+    • Admin
+    • Aksi.
+    Pada kolom aksi, sediakan tombol:
+    • Lihat detail.
+    • Edit transaksi.
+    • Hapus transaksi dengan konfirmasi terlebih dahulu.
+    Tambahkan fitur pencarian berdasarkan nama, nomor transaksi, atau keterangan; filter tanggal; filter jenis transaksi; filter kategori; serta pengurutan data terbaru dan terlama.
+
+    RINCIAN PENGGUNAAN UANG KELUAR
+    Buat halaman khusus untuk mengetahui uang keluar digunakan untuk apa.
+    Fitur yang diperlukan:
+    • Rekap pengeluaran berdasarkan kategori.
+    • Rekap pengeluaran berdasarkan nama penerima.
+    • Rekap pengeluaran berdasarkan tanggal, minggu, dan bulan.
+    • Grafik lingkaran untuk persentase penggunaan uang.
+    • Grafik batang untuk perbandingan pengeluaran setiap kategori.
+    • Total nominal pengeluaran untuk masing-masing kategori.
+    • Detail transaksi yang membentuk total pengeluaran tersebut.
+    Contoh: jika total uang keluar Rp5.000.000, dashboard harus dapat menampilkan berapa yang digunakan untuk belanja kebutuhan, makanan, perlengkapan, transfer, dan kategori lainnya.
+    Semua laporan harus bisa difilter berdasarkan periode tertentu.
+
+    INTEGRASI GOOGLE SHEETS
+    Gunakan Google Sheets sebagai database yang terhubung langsung ke aplikasi.
+    Buat struktur spreadsheet dengan sheet berikut:
+    Sheet 1: TRANSAKSI
+    • ID Transaksi
+    • Tanggal
+    • Nama Pemilik/Penerima
+    • Jenis Transaksi
+    • Kategori
+    • Nominal
+    • Sumber/Tujuan
+    • Keterangan
+    • Petugas
+    • Waktu Pencatatan
+    • Waktu Perubahan
+    Sheet 2: PENGATURAN
+    • Saldo Awal
+    • Nama Aplikasi
+    • Nama Instansi
+    • Daftar Kategori
+    • Pengaturan lainnya
+    Sheet 3: REKAP
+    • Total Uang Masuk
+    • Total Uang Keluar
+    • Saldo Saat Ini
+    • Rekap per Kategori
+    • Rekap per Bulan
+
+    PERHITUNGAN SALDO OTOMATIS
+    Gunakan rumus logika berikut:
+    Saldo Saat Ini = Saldo Awal + Total Uang Masuk - Total Uang Keluar.
+    Saldo setelah transaksi dihitung berdasarkan saldo sebelumnya dan transaksi yang tercatat sesuai urutan tanggal serta waktu pencatatan.
+    Pastikan:
+    • Transaksi uang masuk menambah saldo.
+    • Transaksi uang keluar mengurangi saldo.
+    • Edit transaksi memperbarui seluruh perhitungan yang terdampak.
+    • Hapus transaksi memperbarui saldo dan laporan.
+    • Saldo tidak boleh berubah akibat membuka halaman atau menyegarkan dashboard.
+    • Jangan menghitung transfer internal sebagai pemasukan atau pengeluaran baru apabila transaksi tersebut hanya memindahkan uang antarakun yang dikelola aplikasi.
+
+    KEAMANAN DAN AUDIT
+    Karena aplikasi mengelola data keuangan, tambahkan:
+    • Login pengguna.
+    • Validasi nominal harus berupa angka positif.
+    • Konfirmasi sebelum menghapus transaksi.
+    • Catatan riwayat perubahan transaksi.
+    • Pencatatan siapa yang menambahkan atau mengubah data.
+    • Pencegahan nomor transaksi ganda.
+    • Penanganan koneksi gagal dan pesan kesalahan yang jelas.
+    • Backup data dan ekspor laporan ke Excel atau CSV.
+    Untuk transaksi yang sudah dikonfirmasi, utamakan mekanisme koreksi atau pembatalan yang tercatat dalam audit log daripada menghapus tanpa jejak.
+
+    LAPORAN DAN EKSPOR
+    Buat menu laporan yang memungkinkan pengguna:
+    • Melihat laporan harian.
+    • Melihat laporan bulanan.
+    • Melihat laporan berdasarkan rentang tanggal.
+    • Mengunduh laporan transaksi ke Excel atau CSV.
+    • Mencetak laporan.
+    • Melihat saldo awal, uang masuk, uang keluar, dan saldo akhir pada periode yang dipilih.
+
+    TEKNOLOGI DAN HASIL AKHIR
+    Gunakan teknologi yang sesuai untuk aplikasi web modern, misalnya React dengan TypeScript untuk frontend dan Google Apps Script sebagai backend yang terhubung ke Google Sheets.
+    Buat aplikasi yang benar-benar berfungsi, bukan hanya desain visual atau prototipe.
+    Hasil yang harus diberikan:
+
+    Kode lengkap frontend.
+
+    Kode lengkap Google Apps Script.
+
+    Struktur Google Sheets beserta nama kolomnya.
+
+    Petunjuk konfigurasi dan deployment.
+
+    Contoh data dummy yang diberi label dengan jelas dan dapat dihapus.
+
+    Penjelasan cara menghubungkan aplikasi ke spreadsheet milik pengguna.
+
+    Pengujian tambah, baca, edit, hapus, perhitungan saldo, filter, dan laporan.
+    Pastikan semua tombol bekerja, formulir tersimpan ke Google Sheets, data tetap tersedia setelah halaman dimuat ulang, serta perubahan di spreadsheet dapat disinkronkan kembali ke dashboard.
+    Mulailah dengan membangun aplikasi lengkap beserta struktur database dan backend. Jika ada konfigurasi yang membutuhkan akun atau kredensial Google milik pengguna, buat petunjuk pengaturannya secara jelas tanpa mengarang bahwa koneksi sudah berhasil.
+
+REVISI PORTAL UTAMA DAN HAK AKSES DASHBOARD KEUANGAN WBP
+Perbarui aplikasi Dashboard Transaksi Keuangan Warga Binaan yang sudah dibuat sebelumnya. Pertahankan seluruh fitur yang telah ada, termasuk integrasi Google Sheets, pencatatan uang masuk dan keluar, saldo setiap warga binaan, laporan, serta riwayat transaksi.
+Ubah sistem portal menjadi hanya dua pilihan: PORTAL UMUM dan PORTAL ADMIN. Hapus pilihan Petugas dan Pemeriksa sebagai portal terpisah.
+
+    HALAMAN UTAMA
+    Buat halaman utama yang profesional, modern, dan responsif dengan judul:
+    SISTEM INFORMASI KEUANGAN WARGA BINAAN
+    Subjudul:
+    "Portal informasi dan pengelolaan transaksi keuangan warga binaan secara transparan dan terintegrasi."
+    Tampilkan hanya dua pilihan utama:
+    A. PORTAL UMUM
+    • Dapat diakses oleh siapa saja melalui link aplikasi tanpa login.
+    • Ketika diklik, pengguna diarahkan ke halaman informasi umum.
+    • Pengguna dapat melihat informasi saldo dan transaksi yang memang diizinkan untuk dipublikasikan.
+    • Pengguna tidak dapat menambah, mengedit, menghapus, atau mengubah data.
+    • Tidak boleh ada akses ke halaman Admin tanpa login.
+    B. PORTAL ADMIN
+    • Ketika diklik, tampilkan halaman login Admin.
+    • Admin harus memasukkan username atau email dan password.
+    • Setelah login berhasil, arahkan ke Dashboard Admin.
+    • Admin dapat mengelola data warga binaan, saldo, transaksi uang masuk, pembelanjaan, kategori, laporan, dan pengaturan aplikasi sesuai kewenangannya.
+    • Sediakan tombol logout.
+    Buat kedua pilihan ini terlihat jelas sebagai dua kartu atau tombol besar pada halaman utama.
+
+    FITUR PORTAL UMUM
+    Portal Umum dapat dibuka langsung melalui link tanpa akun.
+    Tampilkan informasi berikut:
+    • Ringkasan total saldo warga binaan, jika memang diizinkan untuk dipublikasikan.
+    • Total uang masuk dan uang keluar secara keseluruhan, jika diizinkan.
+    • Grafik ringkasan transaksi berdasarkan periode.
+    • Informasi umum sistem.
+    • Tanggal pembaruan data terakhir.
+    • Status koneksi sistem.
+    Sediakan halaman pencarian status keuangan warga binaan apabila fitur ini memang diperlukan dan telah mendapat persetujuan untuk akses umum.
+    Jika pencarian individu diaktifkan, gunakan nomor referensi atau identitas pencarian yang sesuai, batasi data yang ditampilkan, dan jangan tampilkan informasi sensitif.
+    Jangan tampilkan kepada publik:
+    • Nama lengkap beserta nomor registrasi jika tidak diizinkan.
+    • Saldo individu tanpa persetujuan dan dasar kewenangan yang jelas.
+    • Nama penitip atau pengirim uang.
+    • Bukti transaksi dan nomor referensi pembayaran.
+    • Catatan pribadi, identitas petugas, dan audit log.
+    • Data login atau informasi rahasia lainnya.
+    Sediakan konfigurasi bagi Admin untuk menentukan informasi mana yang boleh dilihat di Portal Umum. Secara default, sembunyikan saldo individu dan rincian transaksi personal.
+
+    FITUR PORTAL ADMIN
+    Setelah login berhasil, Admin dapat mengakses dashboard lengkap dengan menu:
+
+    Dashboard Utama.
+
+    Data Warga Binaan.
+
+    Status Saldo Warga Binaan.
+
+    Uang Titipan Masuk.
+
+    Pembelanjaan atau Uang Keluar.
+
+    Riwayat Transaksi.
+
+    Verifikasi Transaksi.
+
+    Laporan Keuangan.
+
+    Pengaturan Portal Umum.
+
+    Audit Log.
+
+    Pengaturan Aplikasi.
+
+    Logout.
+    Admin dapat menambahkan, mengedit, melihat, dan menonaktifkan data warga binaan. Admin juga dapat mengelola transaksi dan laporan sesuai kewenangannya.
+    Setiap perubahan transaksi yang telah diverifikasi harus memiliki catatan audit. Jangan mengubah saldo secara langsung tanpa alasan dan riwayat perubahan.
+
+    PEMBATASAN AKSES
+    Terapkan aturan berikut:
+    • Portal Umum: dapat dibuka tanpa login dan hanya dapat membaca data publik yang diizinkan.
+    • Portal Admin: wajib login untuk mengakses fungsi pengelolaan data.
+    • Pengguna Portal Umum tidak boleh memperoleh hak edit melalui manipulasi URL atau tampilan browser.
+    • Semua perubahan data harus melalui backend yang memeriksa autentikasi dan hak akses.
+    • Jangan menaruh password, API key, atau kredensial rahasia di frontend.
+    • Google Sheets tidak boleh dibagikan secara publik hanya demi memungkinkan Portal Umum membaca data.
+    • Buat backend API khusus untuk menyediakan data publik yang sudah difilter dan tidak mengandung informasi sensitif.
+
+    INTEGRASI GOOGLE SHEETS
+    Pertahankan Google Sheets sebagai database utama.
+    Portal Admin dapat membaca dan mengubah data melalui Google Apps Script atau backend yang aman.
+    Portal Umum hanya dapat mengambil data ringkasan yang memang diizinkan untuk dipublikasikan melalui endpoint baca-saja. Jangan memberikan akses langsung ke seluruh isi spreadsheet kepada pengunjung umum.
+    Pastikan perubahan dari Admin tersimpan ke Google Sheets dan ditampilkan pada Portal Umum hanya setelah data berhasil diperbarui.
+
+    TAMPILAN DAN PENGALAMAN PENGGUNA
+    Gunakan desain profesional dengan warna navy blue, putih, abu-abu, aksen hijau untuk uang masuk, dan merah untuk uang keluar.
+    Halaman utama harus sederhana, tidak dipenuhi menu, dan hanya menampilkan dua pilihan portal.
+    Buat tampilan yang responsif untuk komputer dan HP.
+    Tambahkan indikator status koneksi database dan waktu pembaruan terakhir. Jangan menampilkan status berhasil jika data belum benar-benar tersimpan.
+
+    PENGUJIAN DAN HASIL AKHIR
+    Implementasikan revisi ini langsung ke aplikasi yang sudah ada, bukan membuat aplikasi baru yang terpisah.
+    Pastikan:
+    • Portal Umum dapat dibuka melalui link tanpa login.
+    • Portal Admin meminta login.
+    • Admin dapat mengedit data sesuai hak akses.
+    • Portal Umum tidak dapat mengedit data.
+    • URL dashboard Admin tidak dapat digunakan untuk melewati autentikasi.
+    • Informasi sensitif tidak dikirim ke browser pengguna umum.
+    • Data Admin tetap tersimpan di Google Sheets.
+    • Perubahan data memperbarui ringkasan publik yang diizinkan.
+    • Logout mengakhiri sesi Admin dengan benar.
+    Berikan kode lengkap yang telah diperbarui dan petunjuk deployment. Jangan hanya membuat tampilan visual; pastikan pembatasan akses diterapkan di backend dan diuji.
+    Ekspor CSV
+
+PORTAL INFORMASI DAN PENGELOLAAN TRANSAKSI KEUANGAN WARGA BINAAN RUTAN KELAS IIB JENEPONTO
+
+tambahkan pada bagian akun admin tombol reset pada bagian TOTAL TITIPAN MASUK, TOTAL PEMBELANJAAN, TOTAL SALDO TITIPAN, Dan tombol hapus pada UANG TITIPAN MASUK, PEMBELANJAAN KANTIN, RIWAYAT TRANSAKSI, DAN LAPORAN KEUANGAN kemudian tambahkan fitur pemeriksaan perWBP di portal umum
+tambahkan gars pada tabel spreadsheet data CSV yang di unduh agar terlihat lebih rapih
+
+    Pengaturan Identitas UPT & Logo Fleksibel (Bisa Diedit Admin)
+    o Identitas Lengkap: Admin dapat mengubah Nama UPT (misal: Rutan Kelas I Cipinang atau Lapas Kelas IIA Yogyakarta), Nama Aplikasi, Slogan/Subjudul, Alamat & Kota UPT, serta Nama dan NIP Kepala UPT dan Bendahara.
+    o Ubah/Upload Logo Aplikasi: Admin dapat mengunggah file logo instansi langsung dari komputer/HP (Base64 data URL) atau memasukkan tautan gambar web. Logo resmi UPT langsung tampil di Portal Landing, Portal Umum, Sidebar Admin, dan Kop Kuitansi Cetak Bukti Kas.
+
+    Skema Warna Sesuai Panduan:
+    o Warna Utama: Biru Navy (#020617 / #0f172a), Putih, dan Kuning Emas / Amber (#F59E0B / #FACC15) dengan teks Hitam kontras tinggi.
+    o Transaksi Masuk: Menggunakan warna Hijau (#10B981) untuk nominal, tombol titipan, kartu statistik, dan badge verifikasi.
+    o Transaksi Keluar: Menggunakan warna Merah (#EF4444) untuk belanja kantin, penarikan, dan pengeluaran.
+
+    Pengelolaan Data Warga Binaan (Tambah, Hapus, Bebas & Mutasi UPT)
+    o Tambah WBP: Registrasi warga binaan baru dengan nomor registrasi, blok/kamar, saldo awal, dan status.
+    o Status Fleksibel: Mendukung status Aktif, Bebas (dilengkapi tanggal bebas), Mutasi ke UPT Lain (dilengkapi input UPT Tujuan dan No. Surat Keputusan Mutasi), serta Non-Aktif.
+    o Hapus Data WBP: Admin dapat menghapus data warga binaan dengan dialog konfirmasi pengaman dan pencatatan otomatis di Audit Log.
+    o Filter Status: Tabel WBP dapat difilter secara cepat berdasarkan kategori status (Semua, Aktif, Bebas, Mutasi ke UPT Lain).
+
+    Pemeriksaan Data Warga Binaan Satu per Satu (Buku Tabungan / Rekening Koran)
+    o Tersedia tab khusus Pemeriksaan Per WBP pada menu samping Admin.
+    o Dilengkapi menu dropdown dan pencarian untuk memilih satu warga binaan secara spesifik.
+    o Menampilkan profil lengkap, status hukuman/keberadaan, rincian perputaran dana (Saldo Awal, Total Masuk, Total Belanja Keluar, Saldo Terkini), tabel riwayat mutasi transaksi khusus WBP tersebut, tombol Unduh CSV Rekening Koran, dan cetak struk per transaksi.
+
+    Fitur Tutup Buku & Reset Saldo Menjadi Nol (Persiapan Bulan Baru)
+    o Tersedia tombol Tutup Buku & Reset Saldo (Bulan Baru) di tab Status Saldo Rekening.
+    o Proteksi Ganda: Wajib memasukkan kata sandi Admin serta mengetik konfirmasi "RESET".
+    o Pencadangan Otomatis: Tombol unduh Berita Acara Tutup Buku (CSV) sebelum proses eksekusi dilakukan.
+    o Mekanisme Otomatis: Sistem mencatat transaksi pembukuan penutupan saldo bulanan agar rekam jejak keuangan tidak hilang, sekaligus mereset saldo berjalan seluruh WBP menjadi Rp 0 untuk membuka pembukuan periode bulan berikutnya.
+    o Seluruh proses tutup buku dicatat lengkap ke dalam Audit Trail.
+
+    Penggantian Kata Sandi Admin Berkala
+    o Formulir khusus di menu Pengaturan UPT & Password untuk memperbarui kata sandi admin secara teratur.
+    o Memvalidasi kata sandi lama, memeriksa minimal 6 karakter, serta mencocokkan konfirmasi kata sandi baru.
+    o Disimpan secara persisten dan tercatat di riwayat audit keamanan.
+
+    Perapihan Ekspor Tabel CSV (Kompatibel Microsoft Excel)
+    o Menggunakan encoding UTF-8 BOM (\uFEFF) dan pemisah titik-koma (;) standar Excel Indonesia sehingga file CSV yang diunduh langsung tersusun rapi di kolom-kolom spreadsheet tanpa karakter rusak.
+    o Menambahkan metadata kop resmi di baris teratas (Nama Instansi, Judul Laporan, Tanggal & Waktu Cetak).
+    o Tersedia ekspor CSV terpisah untuk:
+
+    Laporan Riwayat Transaksi Lengkap
+
+    Master Data WBP & Rekap Saldo
+
+    Buku Rekening Tabungan Per Warga Binaan
+
+    Berita Acara Tutup Buku Bulanan
+    Ringkasan Pembaruan yang Telah Diterapkan:
+
+    Reset Total Titipan Masuk, Total Belanja Keluar & Saldo ke Rp 0 (Tutup Buku Bulanan)
+    o Modal Tutup Buku & Reset Angka Bulanan kini menyediakan pilihan fleksibel untuk mereset:
+     Total Titipan Masuk kembali menjadi Rp 0
+     Total Belanja Keluar kembali menjadi Rp 0
+     Saldo Berjalan Warga Binaan kembali menjadi Rp 0
+     Opsi otomatis untuk mengarsipkan laporan bulan sebelumnya ke dalam Riwayat Laporan Bulanan.
+    o Dengan fitur ini, setiap pembukaan periode bulan baru akan dimulai dengan angka Rp 0 yang bersih dan rapi, sementara riwayat bulan lalu tetap aman tersimpan dalam arsip.
+
+    Informasi Jumlah Laporan Transaksi Setiap Bulannya di Portal
+    o Dashboard Admin: Ditambahkan tabel & kartu ringkasan "Informasi Jumlah Laporan Transaksi Setiap Bulan", yang menampilkan:
+     Periode Bulan (e.g. Oktober 2026 [Bulan Berjalan], September 2026 [Arsip]).
+     Jumlah Laporan transaksi yang tercatat di bulan tersebut (misal: 24 Laporan Transaksi).
+     Total Titipan Masuk per bulan.
+     Total Belanja Keluar per bulan.
+     Netto / Saldo akhir per bulan.
+     Tombol langsung untuk Unduh CSV Laporan Bulan Tersebut.
+    o Portal Umum: Ditambahkan kartu transparansi publik yang memperlihatkan volume jumlah laporan transaksi setiap bulannya secara terbuka.
+
+    Ikon Sampah Aktif & Pengelolaan Warga Binaan (Tambah & Hapus)
+    o Pada tabel Data Warga Binaan di kolom Aksi Pengelolaan, tombol ikon sampah (Trash2) kini aktif dengan gaya merah beraksen tinggi (bg-rose-50 text-rose-600 hover:bg-rose-600 hover:text-white).
+    o Ketika diklik, sistem menampilkan dialog konfirmasi keamanan lengkap dengan nama, nomor registrasi, blok/kamar, dan saldo WBP sebelum dihapus secara permanen.
+    o Tombol hapus WBP juga tersedia di halaman Pemeriksaan Per WBP dan Modal Detail WBP.
+    o Tombol Registrasi WBP Baru tersedia di bagian atas tabel untuk menambah data sewaktu-waktu.
+
+    Input Blok Hunian Bebas Ketik (Pilihan Dropdown Dihilangkan)
+    o Pada formulir Registrasi & Edit Warga Binaan (WbpModal), input Blok Hunian telah diubah dari dropdown pilihan kaku menjadi kolom teks bebas (<input type="text">) yang dilengkapi saran otomatis (datalist).
+    o Admin kini dapat mengetikkan nama blok atau paviliun hunian apa pun secara leluasa (misal: Blok Tipikor, Blok Mapenaling, Paviliun Cipinang, Kamar Isolasi, dll.) jika terdapat penambahan blok baru
+
+    Pengelolaan Identitas UPT & Logo Aplikasi
+    • Identitas Lengkap Dapat Diedit Admin: Admin dapat mengubah nama instansi/UPT (misal: Rutan Kelas I Jakarta Pusat), nama aplikasi (SIK-WBP), subjudul, alamat kantor UPT, kota, nama & NIP Kepala UPT, serta nama & NIP Bendahara Pengeluaran/Kasir.
+    • Logo Aplikasi Kustom: Admin dapat mengubah tautan URL logo atau langsung mengunggah file gambar logo dari perangkat dengan pratinjau langsung. Logo dinamis ini tampil di halaman portal publik, landing page, dashboard admin, hingga kop resmi cetak nota/resi transaksi.
+
+    Penataan Ekspor CSV Terstruktur & Rapi
+    • Dilengkapi UTF-8 BOM (\uFEFF) dan separator titik koma (;) yang langsung rapi terbuka di Microsoft Excel (regional Indonesia/standar).
+    • Dilengkapi header metadata resmi (Nama UPT, Tanggal Ekspor, Petugas Pencetak, dan Periode).
+    • Tersedia tombol ekspor khusus:
+    o Ekspor Riwayat Transaksi (CSV)
+    o Ekspor Master Data WBP (CSV)
+    o Ekspor Rekening Koran Perorangan WBP (CSV)
+    o Ekspor Rekap Tutup Buku Bulanan (CSV)
+
+    Skema Warna Standar Pemasyarakatan
+    • Warna Utama: Biru Navy (#0B192C / bg-navy-900), Putih Bersih, Hitam, dan Kuning Emas (amber-400).
+    • Aksen Keuangan: Hijau Zamrud (emerald-600) untuk Transaksi Masuk/Titipan dan Merah (rose-600) untuk Transaksi Keluar/Belanja.
+
+    Pengelolaan Penuh Data Warga Binaan (WBP)
+    • Aksi Pengelolaan Lengkap: Ikon tempat sampah (🗑️) dan ikon edit (✏️) aktif di setiap baris tabel WBP maupun di tampilan detail.
+    • Modal Konfirmasi Hapus In-App: Menggunakan modal konfirmasi yang aman dan informatif tanpa risiko terblokir oleh keamanan browser/iFrame.
+    • Dukungan Status Lengkap: WBP Aktif, Bebas (dengan pencatatan tanggal pembebasan), dan Mutasi UPT (dengan pengisian nama UPT Tujuan dan No. Surat Keputusan Mutasi).
+    • Blok Hunian Ketik Bebas: Pilihan dropdown telah dihilangkan pada formulir registrasi/edit WBP, sehingga petugas dapat mengetikkan nama blok atau paviliun hunian secara leluasa (misal: Blok Tipikor, Mapenaling, Paviliun A, dll).
+
+    Tutup Buku & Reset Saldo / Total Masuk & Keluar ke Rp 0
+    • Fitur Tutup Buku & Reset Angka Bulanan:
+    o Pilihan fleksibel untuk mereset Total Titipan Masuk, Total Belanja Keluar, dan Saldo Berjalan menjadi Rp 0 menjelang bulan baru.
+    o Otomatis mencadangkan dan mengarsipkan rekapitulasi keuangan bulan sebelumnya ke dalam Laporan Bulanan.
+    o Dilengkapi tombol unduh backup CSV sebelum reset dan verifikasi keamanan ganda (kata sandi admin & pengetikan konfirmasi "RESET").
+    • Fitur Reset Saldo Per WBP: Tersedia tombol reset saldo ke Rp 0 untuk masing-masing WBP jika diperlukan (misalnya saat persiapan bebas atau mutasi ke UPT lain).
+
+    Pemeriksaan Perorangan (Cek WBP Satu Persatu)
+    • Tab navigasi khusus "Cek WBP" untuk menginspeksi buku rekening setiap warga binaan secara individual.
+    • Menampilkan kartu profil WBP, saldo awal, total uang masuk, total belanja keluar, sisa saldo terkini, mutasi transaksi lengkap, serta tombol Ubah Data, Reset Saldo (Rp 0), Buku Mutasi, Unduh CSV Rekening, dan Hapus WBP.
+
+    Info Jumlah Laporan Bulanan di Portal
+    • Tabel Rekap Laporan Bulanan menyajikan ringkasan per periode: nama bulan, status pembukuan (Bulan Berjalan vs Tutup Buku Diarsipkan), Jumlah Laporan Transaksi, total masuk, total keluar, netto saldo, dan tombol unduh CSV per periode.
+
+    Penggantian Kata Sandi Admin Berkala
+    • Menu khusus di Pengaturan Admin untuk mengganti kata sandi dengan validasi kata sandi lama, standar minimal 6 karakter, konfirmasi kecocokan kata sandi baru, serta pencatatan otomatis ke dalam Audit Log Keamanan.
+    Tambahkan fitur atau tombol di dashboard utama atau umum, tombol pengecekan data masing masing warga binaan satu persatu agar pihak keluarga bisa mengecek transaksi atau status keuangan warga binaan sesuai dengan nama keluarganya
+
+Gemini 3.8 Flash
+Ran for 14m 21s
+summarize_auto Action history chevron_right
+
+Here are key actions taken for the app:
+edit Edited 29 files
+metadata.json
+check_circle
+index.html
+check_circle
+src/index.css
+check_circle
+src/types/index.ts
+check_circle
+src/utils/formatters.ts
+check_circle
+src/utils/googleAppsScriptCode.ts
+check_circle
+src/data/initialData.ts
+check_circle
+src/context/AppContext.tsx
+check_circle
+src/components/common/OfficialLogo.tsx
+check_circle
+src/components/common/ReceiptModal.tsx
+check_circle
+src/components/common/ConfirmModal.tsx
+check_circle
+src/components/public/FamilyWbpChecker.tsx
+check_circle
+src/components/public/LandingPage.tsx
+check_circle
+src/components/public/PublicPortal.tsx
+check_circle
+src/components/admin/AdminLogin.tsx
+check_circle
+src/components/admin/AdminDashboard.tsx
+check_circle
+src/components/admin/WbpManagement.tsx
+check_circle
+src/components/admin/SingleWbpInspection.tsx
+check_circle
+src/components/admin/TitipanMasuk.tsx
+check_circle
+src/components/admin/PembelanjaanKantin.tsx
+check_circle
+src/components/admin/RiwayatTransaksi.tsx
+check_circle
+src/components/admin/RincianPengeluaran.tsx
+check_circle
+src/components/admin/LaporanKeuangan.tsx
+check_circle
+src/components/admin/SaldoStatus.tsx
+check_circle
+src/components/admin/PengaturanUpt.tsx
+check_circle
+src/components/admin/GoogleSheetsIntegration.tsx
+check_circle
+src/components/admin/AuditLogView.tsx
+check_circle
+src/components/admin/AdminPortal.tsx
+check_circle
+src/App.tsx
+check_circle
+build Built
+
+Aplikasi web Sistem Informasi dan Pengelolaan Transaksi Keuangan Warga Binaan (SIK-WBP) telah selesai dibangun dan diperbarui secara menyeluruh sesuai dengan seluruh ketentuan yang diminta.
+Ringkasan Pembaruan dan Fitur Utama
+
+    Struktur Dua Portal Utama
+
+        Halaman Utama (Landing Page):
+
+            Judul: SISTEM INFORMASI KEUANGAN WARGA BINAAN
+
+            Subjudul: "Portal informasi dan pengelolaan transaksi keuangan warga binaan secara transparan dan terintegrasi."
+
+            Dua kartu pilihan: PORTAL UMUM (akses publik tanpa login) dan PORTAL ADMIN (wajib login autentikasi aman).
+
+        Layanan Pengecekan Mandiri untuk Pihak Keluarga:
+
+            Tersedia tombol langsung di halaman utama dan di Portal Umum.
+
+            Pihak keluarga cukup memasukkan nama atau nomor registrasi warga binaan untuk langsung memeriksa kepastian saldo titipan uang digital yang masuk, akumulasi belanja kantin, dan mutasi transaksi secara transparan dan aman tanpa membocorkan data sensitif.
+
+    Fitur Reset & Tutup Buku Bulanan (Admin)
+
+        Tombol Reset (Rp 0) aktif langsung pada kartu statistik:
+
+            TOTAL TITIPAN MASUK
+
+            TOTAL PEMBELANJAAN
+
+            TOTAL SALDO TITIPAN
+
+        Tutup Buku & Reset Saldo (Bulan Baru): Dilengkapi proteksi ganda (kata sandi admin + pengetikan kata "RESET") dan tombol unduh Berita Acara Tutup Buku (CSV) otomatis sebelum pembukuan bulan baru dimulai dari Rp 0.
+
+        Reset Saldo Perorangan: Tombol reset saldo ke Rp 0 untuk masing-masing WBP jika diperlukan (misalnya saat bebas murni atau mutasi).
+
+    Tombol Hapus Berkonfirmasi Aman
+
+        Tombol Hapus aktif dengan dialog konfirmasi in-app pada:
+
+            Uang Titipan Masuk
+
+            Pembelanjaan Kantin / EDC
+
+            Riwayat Seluruh Transaksi
+
+            Laporan Keuangan / Arsip Bulanan
+
+            Data Warga Binaan (Ikon sampah 🗑️ beraksen merah aktif di setiap baris dan detail)
+
+    Input Blok Hunian Bebas Ketik
+
+        Kolom Blok Hunian telah diubah menjadi input teks bebas (<input type="text">) dengan saran otomatis (<datalist>), sehingga petugas dapat mengetikkan nama blok, kamar, atau paviliun apa saja secara leluasa tanpa batasan pilihan kaku.
+
+    Ekspor CSV Rapi Standar Excel Indonesia
+
+        Menggunakan encoding UTF-8 BOM (\uFEFF) dan pemisah titik-koma (;), penomoran berurutan, kop resmi instansi, serta baris pembatas garis tabel (====================) sehingga file CSV yang diunduh langsung terbuka rapi dalam kolom-kolom Microsoft Excel.
+
+    Pengaturan Identitas UPT & Logo Kustom
+
+        Admin dapat mengubah Nama UPT (contoh: RUTAN KELAS IIB JENEPONTO atau lainnya), Nama Aplikasi, Subjudul/Kanwil, Alamat & Kota, serta Pejabat Penandatangan (Nama & NIP Kepala UPT dan Bendahara Pengeluaran).
+
+        Admin dapat mengunggah file logo instansi langsung dari komputer/HP (Base64) atau memasukkan tautan URL gambar web dengan pratinjau instan.
+
+        Formulir penggantian kata sandi admin berkala dengan validasi keamanan minimal 6 karakter.
+
+    Integrasi Google Sheets Lengkap
+
+        Tersedia tab Integrasi Google Sheets di sidebar admin yang menyertakan Kode Lengkap Google Apps Script (Code.gs) siap salin dengan 1 klik.
+
+        Menyertakan dokumentasi struktur sheet (TRANSAKSI, WARGA_BINAAN, PENGATURAN, ARSIP_BULANAN) beserta nama kolom dan tipe datanya.
+
+        Dilengkapi kolom input URL Web App Apps Script serta tombol sinkronisasi dua arah (Tarik Data / Pull dan Kirim Seluruh Data / Push).
+
+    Kredensial Default Login Admin:
+
+        Username: admin
+
+        Password: adminpassword123 (dapat diubah kapan saja di menu Pengaturan UPT & Password)
+
