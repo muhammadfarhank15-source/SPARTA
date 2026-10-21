@@ -579,13 +579,17 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         );
         return true;
       } else {
-        // Also try server API
-        const res = await apiService.loginAdmin(password);
-        if (res && res.success) {
-          setAdminLoggedIn(true);
-          setCurrentPortal('admin');
-          showToast('Login berhasil! Sesi admin aktif.', 'success');
-          return true;
+        // Also try server API fallback if available
+        try {
+          const res = await apiService.loginAdmin(password);
+          if (res && res.success) {
+            setAdminLoggedIn(true);
+            setCurrentPortal('admin');
+            showToast('Login berhasil! Sesi admin aktif.', 'success');
+            return true;
+          }
+        } catch {
+          // Non-fatal if server API is unavailable
         }
       }
 

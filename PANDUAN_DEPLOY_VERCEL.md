@@ -81,19 +81,23 @@ Jika Anda ingin menggunakan proyek Firebase Anda sendiri atau memverifikasi proy
    - **Build Command**: `npm run build`
    - **Output Directory**: `dist`
 
-4. **Isi Environment Variables di Vercel**:
-   Buka accordion **Environment Variables** di halaman setup Vercel, lalu tambahkan:
-   - `VITE_FIREBASE_API_KEY`: *(isi dengan apiKey Firebase Anda)*
-   - `VITE_FIREBASE_AUTH_DOMAIN`: *(isi dengan authDomain Firebase Anda)*
-   - `VITE_FIREBASE_PROJECT_ID`: *(isi dengan projectId Firebase Anda)*
-   - `VITE_FIREBASE_STORAGE_BUCKET`: *(isi dengan storageBucket Firebase Anda)*
-   - `VITE_FIREBASE_MESSAGING_SENDER_ID`: *(isi dengan messagingSenderId Firebase Anda)*
-   - `VITE_FIREBASE_APP_ID`: *(isi dengan appId Firebase Anda)*
-   - `VITE_FIREBASE_DATABASE_ID`: *(opsional, isi jika menggunakan nama database non-default)*
+4. **Isi Environment Variables di Vercel (Opsional / Otomatis Fallback)**:
+   Aplikasi telah dikonfigurasi dengan *Zero-Configuration Fallback* ke `firebase-applet-config.json`. Artinya, aplikasi tetap akan berjalan normal dan terhubung ke Cloud Firestore tanpa mengisi Environment Variables.
+
+   Namun untuk praktik terbaik di Vercel, Anda dapat memasukkan nilai berikut di menu **Environment Variables**:
+   - `VITE_FIREBASE_API_KEY`: `AIzaSyAuqOBC1DlkPnyRQR7Fpb-hchKqH4hybwA`
+   - `VITE_FIREBASE_AUTH_DOMAIN`: `genial-card-03kqt.firebaseapp.com`
+   - `VITE_FIREBASE_PROJECT_ID`: `genial-card-03kqt`
+   - `VITE_FIREBASE_STORAGE_BUCKET`: `genial-card-03kqt.firebasestorage.app`
+   - `VITE_FIREBASE_MESSAGING_SENDER_ID`: `577719413146`
+   - `VITE_FIREBASE_APP_ID`: `1:577719413146:web:0d6e10af5c26e271a6b223`
+   - `VITE_FIREBASE_DATABASE_ID`: `ai-studio-remixremixremixr-9d278c0e-ced2-4587-b71a-eae9ffbab2f7`
+   - `VITE_API_KEY`: `SPARTA`
+   - `API_KEY`: `SPARTA`
 
 5. **Deploy**:
    - Klik tombol **"Deploy"**.
-   - Tunggu 1 menit. Aplikasi Anda langsung online di tautan resmi seperti:
+   - Tunggu sekitar 1 menit. Aplikasi langsung online tanpa error di URL seperti:
      `https://sparta-rujento.vercel.app`
 
 ---
